@@ -76,18 +76,21 @@ const About = () => {
   };
 
   const handleOnTwitterPress = () => {
-    Linking.openURL('https://twitter.com/ElectraProtocol');
+    Linking.openURL('https://twitter.com/032ChessCoin');
   };
 
   const handleOnDiscordPress = () => {
-    Linking.openURL('https://discord.com/invite/B8F7Jdv');
+    Linking.openURL('https://discord.com/invite/APy2TXKDVZ');
   };
 
   const handleOnTelegramPress = () => {
-    Linking.openURL('https://t.me/ElectraProtocol');
+    Linking.openURL('https://t.me/joinchat/-I8F2uaxZSRkZDcy');
   };
   const handleOnGithubPress = () => {
-    Linking.openURL('https://github.com/ElectraProtocol');
+    Linking.openURL('https://github.com/devbest555/ChessCoin032-Wallet');
+  };
+  const handleOnWebsitePress = () => {
+    Linking.openURL('https://www.chesscoin032.com/');
   };
   const handleOnRatePress = () => {
     const options = {
@@ -96,7 +99,7 @@ const About = () => {
       preferredAndroidMarket: AndroidMarket.Google,
       preferInApp: true,
       openAppStoreIfInAppFails: true,
-      fallbackPlatformURL: 'https://www.electraprotocol.com/',
+      fallbackPlatformURL: 'https://www.chesscoin032.com/',
     };
     Rate.rate(options, success => {
       if (success) {
@@ -119,7 +122,7 @@ const About = () => {
         leftIcon={{
           name: 'twitter',
           type: 'font-awesome',
-          color: '#1da1f2',
+          color: '#000000',
         }}
         onPress={handleOnTwitterPress}
         title={loc.settings.about_sm_twitter}
@@ -128,7 +131,7 @@ const About = () => {
         leftIcon={{
           name: 'telegram',
           type: 'font-awesome',
-          color: '#0088cc',
+          color: '#000000',
         }}
         onPress={handleOnTelegramPress}
         title={loc.settings.about_sm_telegram}
@@ -137,22 +140,30 @@ const About = () => {
         leftIcon={{
           name: 'discord',
           type: 'font-awesome-5',
-          color: '#7289da',
+          color: '#000000',
         }}
         onPress={handleOnDiscordPress}
         title={loc.settings.about_sm_discord}
       />
+      <BlueListItem
+        leftIcon={{
+          name: 'info',
+          type: 'font-awesome',
+          color: '#000000',
+        }}
+        onPress={handleOnWebsitePress}
+        title={loc.settings.about_sm_website}
+      />
       <BlueCard>
         <View style={styles.buildWith}>
           <BlueSpacing20 />
-
           <BlueTextCentered>{loc.settings.about_awesome} 👍</BlueTextCentered>
           <BlueSpacing20 />
-          <BlueTextCentered>React Native</BlueTextCentered>
-          <BlueTextCentered>bitcoinjs-lib</BlueTextCentered>
+          <BlueTextCentered>React Native, bitcoinjs-lib, Nodejs, Electrum server</BlueTextCentered>
+          {/* <BlueTextCentered>bitcoinjs-lib</BlueTextCentered>
           <BlueTextCentered>Nodejs</BlueTextCentered>
-          <BlueTextCentered>Electrum server</BlueTextCentered>
-          <BlueSpacing20 />
+          <BlueTextCentered>Electrum server</BlueTextCentered> */}
+          {/* <BlueSpacing20 /> */}
 
           <TouchableOpacity onPress={handleOnGithubPress} style={styles.buttonLink}>
             <Icon size={22} name="github" type="font-awesome-5" color={colors.foregroundColor} />
@@ -160,7 +171,7 @@ const About = () => {
           </TouchableOpacity>
         </View>
       </BlueCard>
-      <BlueListItem
+      {/* <BlueListItem
         leftIcon={{
           name: 'book',
           type: 'font-awesome',
@@ -179,8 +190,8 @@ const About = () => {
         chevron
         onPress={handleOnLicensingPress}
         title={loc.settings.about_license}
-      />
-      {/* <BlueListItem
+      /> }
+      { <BlueListItem
         leftIcon={{
           name: 'flask',
           type: 'font-awesome',
@@ -192,23 +203,23 @@ const About = () => {
         title={loc.settings.about_selftest}
       />
       <BlueSpacing20 /> */}
-      <BlueSpacing20 />
+      {/* <BlueSpacing20 /> */}
       <BlueTextCentered>
-        {getApplicationName()} ver {getVersion()} (build {getBuildNumber()})
+        {getApplicationName()} (Version {getVersion()})
       </BlueTextCentered>
-      <BlueTextCentered>{new Date(getBuildNumber() * 1000).toGMTString()}</BlueTextCentered>
+      {/* <BlueTextCentered>{new Date(getBuildNumber() * 1000).toGMTString()}</BlueTextCentered> */}
       <BlueTextCentered>{getBundleId()}</BlueTextCentered>
-      <BlueTextCentered>
+      {/* <BlueTextCentered>
         w, h = {width}, {height}
-      </BlueTextCentered>
-      <BlueTextCentered>Unique ID: {getUniqueId()}</BlueTextCentered>
-      <View style={styles.copyToClipboard}>
+      </BlueTextCentered> */}
+      {/* <BlueTextCentered>Unique ID: {getUniqueId()}</BlueTextCentered> */}
+      {/* <View style={styles.copyToClipboard}>
         <BlueCopyToClipboardButton
           stringToCopy={(Platform.OS === 'android' ? 'user.id:' : 'app.device:') + getUniqueId()}
           displayText={loc.transactions.details_copy}
         />
       </View>
-      <BlueSpacing20 />
+      <BlueSpacing20 /> */}
       <BlueSpacing20 />
     </ScrollView>
   );
