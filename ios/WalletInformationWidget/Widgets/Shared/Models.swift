@@ -63,7 +63,7 @@ enum MarketDataTimeline: String {
 }
 
 enum UserDefaultsGroupKey: String {
-  case GroupName = "group.com.chesscoin.chess032wallet"
+  case GroupName = "group.io.electraprotocol.xepwallet"
   case PreferredCurrency = "preferredCurrency"
   case ElectrumSettingsHost = "electrum_host"
   case ElectrumSettingsTCPPort = "electrum_tcp_port"
