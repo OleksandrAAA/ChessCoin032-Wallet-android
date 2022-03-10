@@ -70,3 +70,4 @@ artifacts/
 *.mx
 *.realm
 *.realm.lock
+*.apk
