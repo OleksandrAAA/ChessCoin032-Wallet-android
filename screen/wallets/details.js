@@ -39,7 +39,6 @@ import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import { BlueStorageContext } from '../../blue_modules/storage-context';
 import Notifications from '../../blue_modules/notifications';
-import isCatalyst from 'react-native-is-catalyst';
 import { AbstractHDElectrumWallet } from '../../class/wallets/abstract-hd-electrum-wallet';
 
 const prompt = require('../../blue_modules/prompt');

@@ -87,7 +87,7 @@ const About = () => {
     Linking.openURL('https://t.me/joinchat/-I8F2uaxZSRkZDcy');
   };
   const handleOnGithubPress = () => {
-    Linking.openURL('https://github.com/devbest555/ChessCoin032-Wallet');
+    Linking.openURL('https://github.com/OleksandrAAA/ChessCoin032-Wallet');
   };
   const handleOnWebsitePress = () => {
     Linking.openURL('https://www.chesscoin032.com/');
@@ -95,7 +95,7 @@ const About = () => {
   const handleOnRatePress = () => {
     const options = {
       AppleAppID: '1376878040',
-      GooglePackageName: 'com.chesscoin.chess032wallet',
+      GooglePackageName: 'com.electrum.chess032wallet',
       preferredAndroidMarket: AndroidMarket.Google,
       preferInApp: true,
       openAppStoreIfInAppFails: true,

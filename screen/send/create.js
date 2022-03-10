@@ -20,7 +20,6 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import { Icon } from 'react-native-elements';
 import Share from 'react-native-share';
 import RNFS from 'react-native-fs';
-import isCatalyst from 'react-native-is-catalyst';
 import BigNumber from 'bignumber.js';
 
 import { SafeBlueArea, BlueCard, BlueText } from '../../BlueComponents';

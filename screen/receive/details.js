@@ -152,7 +152,7 @@ const ReceiveDetails = () => {
     toolTip.current.showMenu();
   };
   const renderReceiveDetails = () => {
-    let showQRData = bip21encoded.replace("bitcoin:", "chess:");
+    let showQRData = bip21encoded.replace("bitcoin:", "chesscoin:");
     showQRData = showQRData.replace("label", "message");
     return (
       <ScrollView contentContainerStyle={styles.root} keyboardShouldPersistTaps="always">
@@ -212,7 +212,6 @@ const ReceiveDetails = () => {
 
   const obtainWalletAddress = useCallback(async () => {
     Privacy.enableBlur();
-    console.log('receive/details - componentDidMount');
     wallet.setUserHasSavedExport(true);
     await saveToDisk();
     let newAddress;
@@ -388,7 +387,7 @@ const ReceiveDetails = () => {
       {address !== undefined && showAddress && (
         <HandoffComponent
           title={`Bitcoin Transaction ${address}`}
-          type="com.chesscoin.chess032wallet"
+          type="com.electrum.chess032wallet"
           url={`https://blockstream.info/address/${address}`}
         />
       )}

@@ -141,7 +141,7 @@ export class HDLegacyBreadwalletWallet extends HDLegacyP2PKHWallet {
       // finally fetching balance
       await this._fetchBalance();
     } catch (err) {
-      console.warn(err);
+      console.warn('hd-legacy-breadwallet-wallet.js:144', err);
     }
   }
 
@@ -203,7 +203,7 @@ export class HDLegacyBreadwalletWallet extends HDLegacyP2PKHWallet {
     // hack to use
     // AbstractHDElectrumWallet._addPsbtInput for bech32 address
     // HDLegacyP2PKHWallet._addPsbtInput for legacy address
-    const ProxyClass = input.address.startsWith('ep1') ? AbstractHDElectrumWallet : HDLegacyP2PKHWallet;
+    const ProxyClass = input.address.startsWith('bc1') ? AbstractHDElectrumWallet : HDLegacyP2PKHWallet;
     const proxy = new ProxyClass();
     return proxy._addPsbtInput.apply(this, [psbt, input, sequence, masterFingerprintBuffer]);
   }

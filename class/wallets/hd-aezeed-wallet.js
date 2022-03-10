@@ -78,7 +78,7 @@ export class HDAezeedWallet extends AbstractHDElectrumWallet {
   }
 
   async generate() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 13');
   }
 
   _getNode0() {

@@ -23,7 +23,7 @@ const STRUCT = {
  */
 async function setPrefferedCurrency(item) {
   await AsyncStorage.setItem(AppStorage.PREFERRED_CURRENCY, JSON.stringify(item));
-  await DefaultPreference.setName('group.com.chesscoin.chess032wallet');
+  await DefaultPreference.setName('group.com.electrum.chess032wallet');
   await DefaultPreference.set('preferredCurrency', item.endPointKey);
   await DefaultPreference.set('preferredCurrencyLocale', item.locale.replace('-', '_'));
   RNWidgetCenter.reloadAllTimelines();
@@ -31,7 +31,7 @@ async function setPrefferedCurrency(item) {
 
 async function getPreferredCurrency() {
   const preferredCurrency = await JSON.parse(await AsyncStorage.getItem(AppStorage.PREFERRED_CURRENCY));
-  await DefaultPreference.setName('group.com.chesscoin.chess032wallet');
+  await DefaultPreference.setName('group.com.electrum.chess032wallet');
   await DefaultPreference.set('preferredCurrency', preferredCurrency.endPointKey);
   await DefaultPreference.set('preferredCurrencyLocale', preferredCurrency.locale.replace('-', '_'));
   return preferredCurrency;
@@ -107,8 +107,8 @@ function satoshiToLocalCurrency(satoshi) {
       maximumFractionDigits: 8,
     });
   } catch (error) {
-    console.warn(error);
-    console.log(error);
+    console.warn('currency.js:110', error);
+    console.log('currency.js:111', error);
     formatter = new Intl.NumberFormat(FiatUnit.USD.locale, {
       style: 'currency',
       currency: preferredFiatCurrency.endPointKey,

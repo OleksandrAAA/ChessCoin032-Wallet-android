@@ -1,4 +1,4 @@
-package com.chesscoin.chess032wallet;
+package com.electrum.chess032wallet;
 
 import android.app.Application;
 import android.content.Context;
@@ -59,7 +59,8 @@ public class MainApplication extends Application implements ReactApplication {
    */
   private static void initializeFlipper(
       Context context, ReactInstanceManager reactInstanceManager) {
-    if (BuildConfig.DEBUG) {
+
+    if (BuildConfig.DEBUG == false) {
       try {
         /*
          We use reflection here to pick up the class that initializes Flipper,

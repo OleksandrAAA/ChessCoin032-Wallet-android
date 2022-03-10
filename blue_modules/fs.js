@@ -4,7 +4,6 @@ import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import loc from '../loc';
 import DocumentPicker from 'react-native-document-picker';
-import isCatalyst from 'react-native-is-catalyst';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { presentCameraNotAuthorizedAlert } from '../class/camera';
 import ActionSheet from '../screen/ActionSheet';

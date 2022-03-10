@@ -36,7 +36,7 @@ export class AbstractHDWallet extends LegacyWallet {
   }
 
   generate() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 1');
   }
 
   allowSend() {
@@ -44,7 +44,7 @@ export class AbstractHDWallet extends LegacyWallet {
   }
 
   getTransactions() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 2');
   }
 
   /**
@@ -159,23 +159,23 @@ export class AbstractHDWallet extends LegacyWallet {
   }
 
   _getExternalWIFByIndex(index) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 3');
   }
 
   _getInternalWIFByIndex(index) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 4');
   }
 
   _getExternalAddressByIndex(index) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 5');
   }
 
   _getInternalAddressByIndex(index) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 6');
   }
 
   getXpub() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 7');
   }
 
   /**
@@ -232,14 +232,14 @@ export class AbstractHDWallet extends LegacyWallet {
   }
 
   async fetchBalance() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 8');
   }
 
   /**
    * @inheritDoc
    */
   async fetchUtxo() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 9');
   }
 
   weOwnAddress(addr) {
@@ -252,10 +252,10 @@ export class AbstractHDWallet extends LegacyWallet {
   }
 
   _getDerivationPathByAddress(address) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 10');
   }
 
   _getNodePubkeyByIndex(address) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 11');
   }
 }

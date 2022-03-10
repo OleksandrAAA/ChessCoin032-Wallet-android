@@ -42,7 +42,7 @@ class Torsbee {
       }
     } catch (error) {
       response.err = error;
-      console.warn(error);
+      console.warn('torrific.js:45', error);
     }
 
     return response;
@@ -72,7 +72,7 @@ class Torsbee {
       }
     } catch (error) {
       response.err = error;
-      console.warn(error);
+      console.warn('torrific.js:75', error);
     }
 
     return response;
@@ -174,7 +174,7 @@ class TorSocket {
       try {
         await tor.startIfNotStarted();
       } catch (e) {
-        console.warn('Could not bootstrap TOR', e);
+        console.warn('torrific.js:177', e);
         await tor.stopIfRunning();
         this._passOnEvent('error', 'Could not bootstrap TOR');
         return false;

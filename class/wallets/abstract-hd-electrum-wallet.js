@@ -537,7 +537,7 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
       // finally fetching balance
       await this._fetchBalance();
     } catch (err) {
-      console.warn(err);
+      console.warn('abstract-hd-electrum-wallet.js:540', err);
     }
   }
 

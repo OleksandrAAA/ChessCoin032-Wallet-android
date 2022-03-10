@@ -28,7 +28,7 @@ const startAndDecrypt = async retry => {
   } catch (error) {
     // in case of exception reading from keystore, lets retry instead of assuming there is no storage and
     // proceeding with no wallets
-    console.warn(error);
+    console.warn("BlueApp.js:31 startAndDecrypt Exception: " + error);
     wasException = true;
   }
 

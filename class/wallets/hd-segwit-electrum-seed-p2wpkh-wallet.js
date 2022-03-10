@@ -26,7 +26,7 @@ export class HDSegwitElectrumSeedP2WPKHWallet extends HDSegwitBech32Wallet {
   }
 
   async generate() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 15');
   }
 
   getXpub() {
@@ -34,13 +34,18 @@ export class HDSegwitElectrumSeedP2WPKHWallet extends HDSegwitBech32Wallet {
       return this._xpub; // cache hit
     }
     const root = bitcoin.bip32.fromSeed(mn.mnemonicToSeedSync(this.secret, MNEMONIC_TO_SEED_OPTS));
+    console.log('hd-segwit-electrum-seed-p2wpkh-wallet.js:37 root = ', root);
+
     const xpub = root.derivePath("m/0'").neutered().toBase58();
+    console.log('hd-segwit-electrum-seed-p2wpkh-wallet.js:40 xpub = ', xpub);
 
     // bitcoinjs does not support zpub yet, so we just convert it from xpub
     let data = b58.decode(xpub);
+    console.log('hd-segwit-electrum-seed-p2wpkh-wallet.js:44 data = ', data);
     data = data.slice(4);
     data = Buffer.concat([Buffer.from('04b24746', 'hex'), data]);
     this._xpub = b58.encode(data);
+    console.log('hd-segwit-electrum-seed-p2wpkh-wallet.js:47 _xpub = ', _xpub);
 
     return this._xpub;
   }

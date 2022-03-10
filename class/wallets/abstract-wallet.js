@@ -164,9 +164,9 @@ export class AbstractWallet {
   }
 
   setSecret(newSecret) {
-    this.secret = newSecret.trim().replace('bitcoin:', '').replace('BITCOIN:', '');
+    this.secret = newSecret.trim().replace('chesscoin:', '').replace('CHESSCOIN:', '');
 
-    if (this.secret.startsWith('EP1')) this.secret = this.secret.toLowerCase();
+    if (this.secret.startsWith('C1')) this.secret = this.secret.toLowerCase();
 
     // [fingerprint/derivation]zpub
     const re = /\[([^\]]+)\](.*)/;
@@ -274,7 +274,7 @@ export class AbstractWallet {
   }
 
   async wasEverUsed() {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented 12');
   }
 
   /**

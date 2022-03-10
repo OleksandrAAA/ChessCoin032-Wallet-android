@@ -379,7 +379,7 @@ const WalletsList = () => {
 
   const onBarScanned = value => {
     if (!value) return;
-    let realValue = value.replace("chess:", "bitcoin:");
+    let realValue = value.replace("chesscoin:", "bitcoin:");
     console.log("=====realValue::", realValue, value);
     DeeplinkSchemaMatch.navigationRouteFor({ url: realValue }, completionValue => {
       ReactNativeHapticFeedback.trigger('impactLight', { ignoreAndroidSystemSettings: false });

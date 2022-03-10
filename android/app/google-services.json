@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:244290401148:android:118d78b292acaf01892af9",
         "android_client_info": {
-          "package_name": "com.chesscoin.chess032wallet"
+          "package_name": "com.electrum.chess032wallet"
         }
       },
       "oauth_client": [
@@ -39,7 +39,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:244290401148:android:cb92a49da0105f08892af9",
         "android_client_info": {
-          "package_name": "io.electraprotocol.xepwallet"
+          "package_name": "com.electrum.chess032wallet"
         }
       },
       "oauth_client": [

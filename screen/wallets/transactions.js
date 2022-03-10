@@ -591,7 +591,7 @@ const WalletTransactions = () => {
       {wallet.chain === Chain.ONCHAIN && wallet.type !== MultisigHDWallet.type && (
         <HandoffComponent
           title={`Bitcoin Wallet ${wallet.getLabel()}`}
-          type="com.chesscoin.chess032wallet"
+          type="com.electrum.chess032wallet"
           url={`https://blockpath.com/search/addr?q=${wallet.getXpub()}`}
         />
       )}

@@ -160,7 +160,7 @@ export default class ElectrumSettings extends Component {
           await AsyncStorage.setItem(AppStorage.ELECTRUM_TCP_PORT, '');
           await AsyncStorage.setItem(AppStorage.ELECTRUM_SSL_PORT, '');
           try {
-            await DefaultPreference.setName('group.com.chesscoin.chess032wallet');
+            await DefaultPreference.setName('group.com.electrum.chess032wallet');
             await DefaultPreference.clear(AppStorage.ELECTRUM_HOST);
             await DefaultPreference.clear(AppStorage.ELECTRUM_SSL_PORT);
             await DefaultPreference.clear(AppStorage.ELECTRUM_TCP_PORT);
@@ -189,7 +189,7 @@ export default class ElectrumSettings extends Component {
           }
 
           try {
-            await DefaultPreference.setName('group.com.chesscoin.chess032wallet');
+            await DefaultPreference.setName('group.com.electrum.chess032wallet');
             await DefaultPreference.set(AppStorage.ELECTRUM_HOST, host);
             await DefaultPreference.set(AppStorage.ELECTRUM_TCP_PORT, port);
             await DefaultPreference.set(AppStorage.ELECTRUM_SSL_PORT, sslPort);
@@ -287,7 +287,7 @@ export default class ElectrumSettings extends Component {
               <BlueSpacing20 />
               <View style={styles.inputWrap}>
                 <TextInput
-                  placeholder={loc.formatString(loc.settings.electrum_port, { example: '50001' })}
+                  placeholder={loc.formatString(loc.settings.electrum_port, { example: '57301' })}
                   value={this.state.port}
                   onChangeText={text => this.setState({ port: text.trim() })}
                   numberOfLines={1}
@@ -307,7 +307,7 @@ export default class ElectrumSettings extends Component {
               <BlueSpacing20 />
               <View style={styles.inputWrap}>
                 <TextInput
-                  placeholder={loc.formatString(loc.settings.electrum_port_ssl, { example: '50002' })}
+                  placeholder={loc.formatString(loc.settings.electrum_port_ssl, { example: '57302' })}
                   value={this.state.sslPort}
                   onChangeText={text => this.setState({ sslPort: text.trim() })}
                   numberOfLines={1}

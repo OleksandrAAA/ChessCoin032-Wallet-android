@@ -279,7 +279,7 @@ const TransactionsStatus = () => {
     <SafeBlueArea>
       <HandoffComponent
         title={`Bitcoin Transaction ${tx.hash}`}
-        type="com.chesscoin.chess032wallet"
+        type="com.electrum.chess032wallet"
         url={`https://blockstream.info/tx/${tx.hash}`}
       />
 

@@ -25,7 +25,7 @@ import {
   BlueSpacing20,
 } from '../../BlueComponents';
 import navigationStyle from '../../components/navigationStyle';
-import { HDSegwitBech32Wallet, SegwitP2SHWallet, HDSegwitP2SHWallet, LightningCustodianWallet, AppStorage } from '../../class';
+import { HDSegwitBech32Wallet, SegwitP2SHWallet, HDSegwitP2SHWallet, LightningCustodianWallet, AppStorage, LegacyWallet, HDLegacyElectrumSeedP2PKHWallet, HDLegacyP2PKHWallet, HDLegacyBreadwalletWallet, SegwitBech32Wallet, HDSegwitElectrumSeedP2WPKHWallet, MultisigHDWallet } from '../../class';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { Chain } from '../../models/bitcoinUnits';

@@ -1,4 +1,4 @@
-package com.chesscoin.chess032wallet;
+package com.electrum.chess032wallet;
 
 import com.wix.detox.Detox;
 

@@ -107,7 +107,7 @@ export const BlueStorageProvider = ({ children }) => {
       console.log('fetch tx took', (end - start) / 1000, 'sec');
     } catch (err) {
       noErr = false;
-      console.warn(err);
+      console.warn('storage-context.js:110', err);
     } finally {
       setWalletTransactionUpdateStatus(WalletTransactionsStatus.NONE);
     }
@@ -137,7 +137,7 @@ export const BlueStorageProvider = ({ children }) => {
       console.log('fetch tx took', (end - start) / 1000, 'sec');
     } catch (err) {
       noErr = false;
-      console.warn(err);
+      console.warn('storage-context.js:140', err);
     } finally {
       setWalletTransactionUpdateStatus(WalletTransactionsStatus.NONE);
     }

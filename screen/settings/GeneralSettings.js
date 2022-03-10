@@ -76,7 +76,7 @@ const GeneralSettings = () => {
           <BlueSpacing20 />
         </>
       ) : null}
-      {/* <BlueListItem
+      <BlueListItem
         Component={TouchableWithoutFeedback}
         title={loc.settings.general_adv_mode}
         switch={{ onValueChange: onAdvancedModeSwitch, value: isAdancedModeSwitchEnabled, testID: 'AdvancedMode' }}
@@ -84,7 +84,7 @@ const GeneralSettings = () => {
       <BlueCard>
         <BlueText>{loc.settings.general_adv_mode_e}</BlueText>
       </BlueCard>
-      <BlueSpacing20 /> */}
+      <BlueSpacing20 />
     </ScrollView>
   );
 };

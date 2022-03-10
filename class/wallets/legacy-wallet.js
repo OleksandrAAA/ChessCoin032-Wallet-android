@@ -104,7 +104,7 @@ export class LegacyWallet extends AbstractWallet {
       this.unconfirmed_balance = Number(balance.unconfirmed);
       this._lastBalanceFetch = +new Date();
     } catch (Error) {
-      console.warn(Error);
+      console.warn('legacy-wallet.js:107', Error);
     }
   }
 
@@ -137,7 +137,7 @@ export class LegacyWallet extends AbstractWallet {
 
       this.utxo = newUtxos;
     } catch (Error) {
-      console.warn(Error);
+      console.warn('legacy-wallet.js:140', Error);
     }
   }
 

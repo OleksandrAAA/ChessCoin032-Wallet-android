@@ -25,7 +25,7 @@ export class HDLegacyElectrumSeedP2PKHWallet extends HDLegacyP2PKHWallet {
   }
 
   async generate() {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented 14');
   }
 
   getXpub() {
@@ -33,7 +33,11 @@ export class HDLegacyElectrumSeedP2PKHWallet extends HDLegacyP2PKHWallet {
       return this._xpub; // cache hit
     }
     const root = bitcoin.bip32.fromSeed(mn.mnemonicToSeedSync(this.secret, MNEMONIC_TO_SEED_OPTS));
+    console.log('hd-legacy-electrum-seed-p2pkh-wallet.js:36 root = ', root);
+
     this._xpub = root.neutered().toBase58();
+    console.log('hd-legacy-electrum-seed-p2pkh-wallet.js:39 _xpub = ', _xpub);
+
     return this._xpub;
   }
 
@@ -75,13 +79,13 @@ export class HDLegacyElectrumSeedP2PKHWallet extends HDLegacyP2PKHWallet {
 
     if (node === 0 && !this._node0) {
       const xpub = this.getXpub();
-      const hdNode = HDNode.fromBase58(xpub);
+      const hdNode = bitcoin.bip32.fromBase58(xpub);
       this._node0 = hdNode.derive(node);
     }
 
     if (node === 1 && !this._node1) {
       const xpub = this.getXpub();
-      const hdNode = HDNode.fromBase58(xpub);
+      const hdNode = bitcoin.bip32.fromBase58(xpub);
       this._node1 = hdNode.derive(node);
     }
 

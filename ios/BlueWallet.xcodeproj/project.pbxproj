@@ -1634,7 +1634,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet;
 				PRODUCT_NAME = BlueWallet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -1679,7 +1679,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet;
 				PRODUCT_NAME = BlueWallet;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -1717,7 +1717,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.TodayExtension;
 				PRODUCT_NAME = "BlueWallet - Bitcoin Price";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1755,7 +1755,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.TodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.TodayExtension;
 				PRODUCT_NAME = "BlueWallet - Bitcoin Price";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1788,7 +1788,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.Stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1818,7 +1818,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.Stickers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1855,7 +1855,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.PriceWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.PriceWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1896,7 +1896,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.PriceWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.PriceWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1937,7 +1937,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.MarketWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.MarketWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1979,7 +1979,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.MarketWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.MarketWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -2021,7 +2021,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.WalletInformationAndMarketWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.WalletInformationAndMarketWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -2064,7 +2064,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.WalletInformationAndMarketWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.WalletInformationAndMarketWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -2105,7 +2105,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.WalletInformationWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.WalletInformationWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -2146,7 +2146,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.WalletInformationWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.WalletInformationWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -2289,7 +2289,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.watchkitapp.watchkitExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.watchkitapp.watchkitExtension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -2328,7 +2328,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.watchkitapp.watchkitExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.watchkitapp.watchkitExtension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -2365,7 +2365,7 @@
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -2403,7 +2403,7 @@
 				INFOPLIST_FILE = BlueWalletWatch/Info.plist;
 				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoin.chess032wallet.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.electrum.chess032wallet.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;

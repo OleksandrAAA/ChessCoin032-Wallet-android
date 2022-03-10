@@ -4,7 +4,7 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.chesscoin.chess032wallet.fetchTxsForWallet</string>
+		<string>com.electrum.chess032wallet.fetchTxsForWallet</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -23,7 +23,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.chesscoin.psbt</string>
+				<string>com.electrum.chess032wallet.psbt</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,7 +37,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.chesscoin.psbt.txn</string>
+				<string>com.electrum.chess032wallet.psbt.txn</string>
 			</array>
 		</dict>
 		<dict>
@@ -51,7 +51,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.chesscoin.txt</string>
+				<string>com.electrum.chess032wallet.txt</string>
 			</array>
 		</dict>
 		<dict>
@@ -65,7 +65,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.chesscoin.json</string>
+				<string>com.electrum.chess032wallet.json</string>
 			</array>
 		</dict>
 		<dict>
@@ -79,7 +79,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.chesscoin.backup</string>
+				<string>com.electrum.chess032wallet.backup</string>
 			</array>
 		</dict>
 	</array>
@@ -227,7 +227,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.psbt</string>
+			<string>com.electrum.chess032wallet.psbt</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -246,7 +246,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.psbt.txn</string>
+			<string>com.electrum.chess032wallet.psbt.txn</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -268,7 +268,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.psbt</string>
+			<string>com.electrum.chess032wallet.psbt</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -287,7 +287,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.psbt.txn</string>
+			<string>com.electrum.chess032wallet.psbt.txn</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -306,7 +306,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.txt</string>
+			<string>chess032wallet.chess032wallet.txt</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -325,7 +325,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.json</string>
+			<string>com.electrum.chess032wallet.json</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -344,7 +344,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.chesscoin.backup</string>
+			<string>com.electrum.chess032wallet.backup</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

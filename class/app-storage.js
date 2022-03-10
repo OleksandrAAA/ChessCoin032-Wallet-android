@@ -221,6 +221,9 @@ export class AppStorage {
    */
   async loadFromDisk(password) {
     let data = await this.getItem('data');
+
+    console.log(data);
+
     if (password) {
       data = this.decryptData(data, password);
       if (data) {
@@ -293,7 +296,7 @@ export class AppStorage {
             try {
               lndhub = await AsyncStorage.getItem(AppStorage.LNDHUB);
             } catch (Error) {
-              console.warn(Error);
+              console.warn('app-storage.js:299', Error);
             }
 
             if (unserializedWallet.baseURI) {
@@ -372,7 +375,7 @@ export class AppStorage {
           }
         }
       } catch (error) {
-        console.warn(error.message);
+        console.warn('app-storage.js:378', error.message);
       }
     }
   }
