@@ -544,6 +544,7 @@
   },
   "units": {
     "BTC": "BTC",
+    "CHESS": "CHESS",
     "MAX": "МАКС",
     "sat_byte": "сатоши/байт",
     "sats": "сатоши"

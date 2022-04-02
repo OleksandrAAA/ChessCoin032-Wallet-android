@@ -287,18 +287,18 @@ export class BlueWalletNavigationHeader extends Component {
   changeWalletBalanceUnit = () => {
     let walletPreviousPreferredUnit = this.state.wallet.getPreferredBalanceUnit();
     const wallet = this.state.wallet;
-    if (walletPreviousPreferredUnit === BitcoinUnit.BTC) {
+    if (walletPreviousPreferredUnit === BitcoinUnit.CHESS) {
       wallet.preferredBalanceUnit = BitcoinUnit.LOCAL_CURRENCY;
-      walletPreviousPreferredUnit = BitcoinUnit.BTC;
+      walletPreviousPreferredUnit = BitcoinUnit.CHESS;
     } else if (walletPreviousPreferredUnit === BitcoinUnit.SATS) {
       wallet.preferredBalanceUnit = BitcoinUnit.LOCAL_CURRENCY;
       walletPreviousPreferredUnit = BitcoinUnit.SATS;
     } else if (walletPreviousPreferredUnit === BitcoinUnit.LOCAL_CURRENCY) {
-      wallet.preferredBalanceUnit = BitcoinUnit.BTC;
+      wallet.preferredBalanceUnit = BitcoinUnit.CHESS;
       walletPreviousPreferredUnit = BitcoinUnit.LOCAL_CURRENCY;
     } else {
-      wallet.preferredBalanceUnit = BitcoinUnit.BTC;
-      walletPreviousPreferredUnit = BitcoinUnit.BTC;
+      wallet.preferredBalanceUnit = BitcoinUnit.CHESS;
+      walletPreviousPreferredUnit = BitcoinUnit.CHESS;
     }
 
     this.setState({ wallet, walletPreviousPreferredUnit: walletPreviousPreferredUnit }, () => {
@@ -1181,7 +1181,7 @@ export const BlueReceiveButtonIcon = props => {
   );
 };
 
-export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = BitcoinUnit.BTC, timeElapsed }) => {
+export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = BitcoinUnit.CHESS, timeElapsed }) => {
   const [subtitleNumberOfLines, setSubtitleNumberOfLines] = useState(1);
   const { colors } = useTheme();
   const { navigate } = useNavigation();

@@ -17,7 +17,7 @@ const Success = () => {
   };
   const { colors } = useTheme();
   const { dangerouslyGetParent } = useNavigation();
-  const { amount, fee, amountUnit = BitcoinUnit.BTC, invoiceDescription = '', onDonePressed = pop } = useRoute().params;
+  const { amount, fee, amountUnit = BitcoinUnit.CHESS, invoiceDescription = '', onDonePressed = pop } = useRoute().params;
   const stylesHook = StyleSheet.create({
     root: {
       backgroundColor: colors.elevated,
@@ -87,7 +87,7 @@ export const SuccessView = ({ amount, amountUnit, fee, invoiceDescription, shoul
         </View>
         {fee > 0 && (
           <Text style={styles.feeText}>
-            {loc.send.create_fee}: {new BigNumber(fee).toFixed()} {loc.units[BitcoinUnit.BTC]}
+            {loc.send.create_fee}: {new BigNumber(fee).toFixed()} {loc.units[BitcoinUnit.CHESS]}
           </Text>
         )}
         <Text numberOfLines={0} style={styles.feeText}>

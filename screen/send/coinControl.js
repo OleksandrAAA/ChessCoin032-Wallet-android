@@ -60,7 +60,7 @@ const ChangeBadge = () => {
 
 const OutputList = ({
   item: { address, txid, value, vout, confirmations = 0 },
-  balanceUnit = BitcoinUnit.BTC,
+  balanceUnit = BitcoinUnit.CHESS,
   oMemo,
   frozen,
   change,
@@ -131,7 +131,7 @@ OutputList.propTypes = {
   onDeSelect: PropTypes.func,
 };
 
-const OutputModal = ({ item: { address, txid, value, vout, confirmations = 0 }, balanceUnit = BitcoinUnit.BTC, oMemo }) => {
+const OutputModal = ({ item: { address, txid, value, vout, confirmations = 0 }, balanceUnit = BitcoinUnit.CHESS, oMemo }) => {
   const { colors } = useTheme();
   const { txMetadata } = useContext(BlueStorageContext);
   const memo = oMemo || txMetadata[txid]?.memo || '';

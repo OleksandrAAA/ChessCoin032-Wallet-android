@@ -134,7 +134,7 @@ const SendDetails = () => {
         const { address, amount, memo: initialMemo, payjoinUrl } = DeeplinkSchemaMatch.decodeBitcoinUri(routeParams.uri);
         setAddresses([{ address, amount, amountSats: currency.btcToSatoshi(amount), key: String(Math.random()) }]);
         setMemo(initialMemo || '');
-        setAmountUnit(BitcoinUnit.BTC);
+        setAmountUnit(BitcoinUnit.CHESS);
         setPayjoinUrl(payjoinUrl);
       } catch (error) {
         console.log(error);
@@ -143,7 +143,7 @@ const SendDetails = () => {
     } else if (routeParams.address) {
       setAddresses([{ address: routeParams.address, key: String(Math.random()) }]);
       setMemo(routeParams.memo || '');
-      setAmountUnit(BitcoinUnit.BTC);
+      setAmountUnit(BitcoinUnit.CHESS);
     } else {
       setAddresses([{ address: '', key: String(Math.random()) }]); // key is for the FlatList
     }
@@ -340,7 +340,7 @@ const SendDetails = () => {
       return Alert.alert(loc.errors.error, loc.send.details_address_field_is_not_valid);
     }
 
-    const dataWithoutSchema = data.replace('bitcoin:', '').replace('BITCOIN:', '');
+    const dataWithoutSchema = data.replace('chesscoin:', '');
     if (wallet.isAddressValid(dataWithoutSchema)) {
       setAddresses(addresses => {
         addresses[scrollIndex.current].address = dataWithoutSchema;
@@ -353,21 +353,19 @@ const SendDetails = () => {
     let address = '';
     let options;
     try {
-      if (!data.toLowerCase().startsWith('bitcoin:')) data = `bitcoin:${data}`;
-      console.log("===bip21decode-1::", data);
+      if (!data.toLowerCase().startsWith('chesscoin:')) data = `chesscoin:${data}`;
       const decoded = DeeplinkSchemaMatch.bip21decode(data);
       address = decoded.address;
       options = decoded.options;
     } catch (error) {
       data = data.replace(/(amount)=([^&]+)/g, '').replace(/(amount)=([^&]+)&/g, '');
-      console.log("===bip21decode-2::", data);
       const decoded = DeeplinkSchemaMatch.bip21decode(data);
       decoded.options.amount = 0;
       address = decoded.address;
       options = decoded.options;
     }
 
-    if (btcAddressRx.test(address) || address.startsWith('ep1') || address.startsWith('EP1')) {
+    if (btcAddressRx.test(address) || address.startsWith('c') || address.startsWith('C')) {
       setAddresses(addresses => {
         addresses[scrollIndex.current].address = address;
         addresses[scrollIndex.current].amount = options.amount;
@@ -375,11 +373,11 @@ const SendDetails = () => {
         return [...addresses];
       });
       setUnits(units => {
-        units[scrollIndex.current] = BitcoinUnit.BTC; // also resetting current unit to BTC
+        units[scrollIndex.current] = BitcoinUnit.CHESS; // also resetting current unit to BTC
         return [...units];
       });
       setMemo(options.label || options.message);
-      setAmountUnit(BitcoinUnit.BTC);
+      setAmountUnit(BitcoinUnit.CHESS);
       setPayjoinUrl(options.pj || '');
     }
 
@@ -833,7 +831,7 @@ const SendDetails = () => {
               return [...addresses];
             });
             setUnits(units => {
-              units[scrollIndex.current] = BitcoinUnit.BTC;
+              units[scrollIndex.current] = BitcoinUnit.CHESS;
               return [...units];
             });
             LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -1148,7 +1146,6 @@ const SendDetails = () => {
                 case BitcoinUnit.SATS:
                   item.amountSats = parseInt(item.amount);
                   break;
-                case BitcoinUnit.BTC:
                 case BitcoinUnit.CHESS:
                   item.amountSats = currency.btcToSatoshi(item.amount);
                   break;
@@ -1170,7 +1167,6 @@ const SendDetails = () => {
             setAddresses(addresses => {
               item.amount = text;
               switch (units[index] || amountUnit) {
-                case BitcoinUnit.BTC:
                 case BitcoinUnit.CHESS:
                   item.amountSats = currency.btcToSatoshi(item.amount);
                   break;
@@ -1228,7 +1224,7 @@ const SendDetails = () => {
 
   // if utxo is limited we use it to calculate available balance
   const balance = utxo ? utxo.reduce((prev, curr) => prev + curr.value, 0) : wallet.getBalance();
-  const allBalance = formatBalanceWithoutSuffix(balance, BitcoinUnit.BTC, true);
+  const allBalance = formatBalanceWithoutSuffix(balance, BitcoinUnit.CHESS, true);
   
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

@@ -562,7 +562,8 @@
     "tip": "This feature allows you to see, label, freeze or select coins for improved wallet management. You can select multiple coins by tapping on the colored circles."
   },
   "units": {
-    "BTC": "CHESS",
+    "BTC": "BTC",
+    "CHESS": "CHESS",
     "MAX": "Max",
     "sat_byte": "sat/byte",
     "sats": "sats"

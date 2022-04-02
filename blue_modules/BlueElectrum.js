@@ -40,10 +40,14 @@ async function _getRealm() {
 }
 
 const storageKey = 'ELECTRUM_PEERS';
+//const defaultPeer = { host: 'electrum1.bluewallet.io', ssl: '57302' };
+//const hardcodedPeers = [
+//  { host: 'electrum1.bluewallet.io', ssl: '443' },
+//  { host: 'electrum2.bluewallet.io', ssl: '443' },
+//];
+
 const defaultPeer = { host: '54.36.163.33', ssl: '57302' };
 const hardcodedPeers = [
-  //{ host: 'electrum1.bluewallet.io', ssl: '443' },
-  //{ host: 'electrum2.bluewallet.io', ssl: '443' },
   { host: '54.36.163.33', ssl: '57302' },
   { host: '51.178.41.236', ssl: '57302' },
 ];
@@ -88,7 +92,7 @@ async function connectMain() {
   }
 
   try {
-    console.log('begin connection:', JSON.stringify(usingPeer));
+
     mainClient = new ElectrumClient(
       usingPeer.host.endsWith('.onion') ? torrific : global.net,
       global.tls,
@@ -110,7 +114,7 @@ async function connectMain() {
         setTimeout(connectMain, usingPeer.host.endsWith('.onion') ? 4000 : 500);
       }
     };
-    const ver = await mainClient.initElectrum({ client: 'bluewallet', version: '1.4' });
+    const ver = await mainClient.initElectrum({ client: 'chess032wallet', version: '1.4' });
     if (ver && ver[0]) {
       console.log('connected to ', ver);
       serverName = ver[0];
@@ -121,9 +125,11 @@ async function connectMain() {
         disableBatching = true;
       }
       const header = await mainClient.blockchainHeaders_subscribe();
+
       if (header && header.height) {
         latestBlockheight = header.height;
         latestBlockheightTimestamp = Math.floor(+new Date() / 1000);
+        console.log('[* BlueElectrum.js:132] latestBlockheight = ', latestBlockheight);
       }
       // AsyncStorage.setItem(storageKey, JSON.stringify(peers));  TODO: refactor
     }
@@ -287,6 +293,7 @@ module.exports.getConfig = async function () {
     port: mainClient.port,
     serverName,
     connected: mainClient.timeLastCall !== 0 && mainClient.status,
+    blocks: (latestBlockheight != null) ? latestBlockheight : 0,
   };
 };
 
@@ -711,16 +718,17 @@ module.exports.estimateFees = async function () {
   if (!histogram) throw new Error('timeout while getting mempool_getFeeHistogram');
 
   // fetching what electrum (which uses bitcoin core) thinks about fees:
-  const _fast = await module.exports.estimateFee(1);
-  const _medium = await module.exports.estimateFee(18);
-  const _slow = await module.exports.estimateFee(144);
+  //const _fast = await module.exports.estimateFee(1);
+  //const _medium = await module.exports.estimateFee(18);
+  //const _slow = await module.exports.estimateFee(144);
 
   // calculating fast fees from mempool:
-  const fast = 100000; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
-  // recalculating medium and slow fees using bitcoincore estimations only like relative weights:
-  // (minimum 1 sat, just for any case)
-  const medium = 1000; //Math.max(1, Math.round((fast * _medium) / _fast));
-  const slow = 100; //Math.max(1, Math.round((fast * _slow) / _fast));
+  //const fast = 100000; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
+  //const medium = 1000; //Math.max(1, Math.round((fast * _medium) / _fast));
+  //const slow = 100; //Math.max(1, Math.round((fast * _slow) / _fast));
+  const fast = 44200; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
+  const medium = 442; //Math.max(1, Math.round((fast * _medium) / _fast));
+  const slow = 44.2; //Math.max(1, Math.round((fast * _slow) / _fast));
   return { fast, medium, slow };
 };
 
@@ -763,7 +771,7 @@ module.exports.estimateCurrentBlockheight = function () {
     const timeDiff = Math.floor(+new Date() / 1000) - latestBlockheightTimestamp;
     const extraBlocks = Math.floor(timeDiff / (9.93 * 60));
     return latestBlockheight + extraBlocks;
-  }
+  }  
 
   const baseTs = 1587570465609; // uS
   const baseHeight = 627179;

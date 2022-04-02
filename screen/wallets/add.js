@@ -117,14 +117,16 @@ const WalletsAdd = () => {
         // btc was selected
         // index 1 radio - segwit single address
         w = new SegwitP2SHWallet();
-        w.setLabel(label || loc.wallets.details_title);
+        w.setLabel(label || loc.wallets.details_title + ' 2');         
       } else {
         // btc was selected
-        // index 2 radio - hd bip84
-        w = new HDSegwitBech32Wallet();
+        // index 2 radio - hd bip32 Standard Lagacy Wallet
+        w = new HDLegacyElectrumSeedP2PKHWallet();
         w.setLabel(label || loc.wallets.details_title);
       }
+
       if (selectedWalletType === ButtonSelected.ONCHAIN) {
+        
         if (entropy) {
           try {
             await w.generateFromEntropy(entropy);
@@ -141,7 +143,9 @@ const WalletsAdd = () => {
         await saveToDisk();
         A(A.ENUM.CREATED_WALLET);
         ReactNativeHapticFeedback.trigger('notificationSuccess', { ignoreAndroidSystemSettings: false });
-        if (w.type === HDSegwitP2SHWallet.type || w.type === HDSegwitBech32Wallet.type) {
+        if (w.type === HDSegwitP2SHWallet.type || w.type === HDSegwitBech32Wallet.type || w.type === HDLegacyElectrumSeedP2PKHWallet.type ||
+            w.type === LegacyWallet.type) {
+          console.log('Backup seedkey....');
           navigate('PleaseBackup', {
             walletID: w.getID(),
           });
@@ -258,7 +262,7 @@ const WalletsAdd = () => {
                     containerStyle={[styles.noPadding, stylesHook.noPadding]}
                     bottomDivider={false}
                     onPress={() => setSelectedIndex(0)}
-                    title={HDSegwitBech32Wallet.typeReadable}
+                    title={HDLegacyElectrumSeedP2PKHWallet.typeReadable}
                     checkmark={selectedIndex === 0}
                   />
                   <BlueListItem

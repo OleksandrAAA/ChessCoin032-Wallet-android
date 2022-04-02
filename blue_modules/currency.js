@@ -107,8 +107,7 @@ function satoshiToLocalCurrency(satoshi) {
       maximumFractionDigits: 8,
     });
   } catch (error) {
-    console.warn('currency.js:110', error);
-    console.log('currency.js:111', error);
+    console.log('currency.js:110', error);
     formatter = new Intl.NumberFormat(FiatUnit.USD.locale, {
       style: 'currency',
       currency: preferredFiatCurrency.endPointKey,

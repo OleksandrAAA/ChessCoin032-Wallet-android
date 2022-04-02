@@ -58,7 +58,6 @@ class AmountInput extends Component {
     const amount = this.props.amount || 0;
     let sats = 0;
     switch (previousUnit) {
-      case BitcoinUnit.BTC:
       case BitcoinUnit.CHESS:
         sats = new BigNumber(amount).multipliedBy(100000000).toString();
         break;
@@ -93,22 +92,22 @@ class AmountInput extends Component {
   changeAmountUnit = () => {
     let previousUnit = this.props.unit;
     let newUnit;
-    if (previousUnit === BitcoinUnit.BTC) {
+    if (previousUnit === BitcoinUnit.CHESS) {
       newUnit = BitcoinUnit.LOCAL_CURRENCY;
     } else if (previousUnit === BitcoinUnit.SATS) {
       newUnit = BitcoinUnit.LOCAL_CURRENCY;
     } else if (previousUnit === BitcoinUnit.LOCAL_CURRENCY) {
-      newUnit = BitcoinUnit.BTC;
+      newUnit = BitcoinUnit.CHESS;
     } else {
       newUnit = BitcoinUnit.LOCAL_CURRENCY;
-      previousUnit = BitcoinUnit.BTC;
+      previousUnit = BitcoinUnit.CHESS;
     }
     this.onAmountUnitChange(previousUnit, newUnit);
   };
 
   maxLength = () => {
     switch (this.props.unit) {
-      case BitcoinUnit.BTC:
+      case BitcoinUnit.CHESS:
         return 10;
       case BitcoinUnit.SATS:
         return 15;
@@ -174,7 +173,6 @@ class AmountInput extends Component {
     // if main display is fiat - secondary dislay is btc
     let sat;
     switch (unit) {
-      case BitcoinUnit.BTC:
       case BitcoinUnit.CHESS:
         sat = new BigNumber(amount).multipliedBy(100000000).toString();
         secondaryDisplayCurrency = formatBalanceWithoutSuffix(sat, BitcoinUnit.LOCAL_CURRENCY, false);
@@ -231,13 +229,13 @@ class AmountInput extends Component {
                 style={[styles.input, stylesHook.input]}
               />
               {unit !== BitcoinUnit.LOCAL_CURRENCY && amount !== BitcoinUnit.MAX && (
-                <Text style={[styles.cryptoCurrency, stylesHook.cryptoCurrency]}>{' ' + loc.units[BitcoinUnit.BTC]}</Text>
+                <Text style={[styles.cryptoCurrency, stylesHook.cryptoCurrency]}>{' ' + loc.units[BitcoinUnit.CHESS]}</Text>
               )}
             </View>
             <View style={styles.secondaryRoot}>
               <Text style={styles.secondaryText}>
                 {unit === BitcoinUnit.LOCAL_CURRENCY && amount !== BitcoinUnit.MAX ? removeTrailingZeros(secondaryDisplayCurrency) : secondaryDisplayCurrency}
-                {unit === BitcoinUnit.LOCAL_CURRENCY && amount !== BitcoinUnit.MAX ? ` ${loc.units[BitcoinUnit.BTC]}` : null}
+                {unit === BitcoinUnit.LOCAL_CURRENCY && amount !== BitcoinUnit.MAX ? ` ${loc.units[BitcoinUnit.CHESS]}` : null}
               </Text>
             </View>
           </View>

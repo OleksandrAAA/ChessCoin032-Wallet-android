@@ -555,6 +555,7 @@
   },
   "units": {
     "BTC": "比特幣",
+    "CHESS": "CHESS",
     "MAX": "最大",
     "sat_byte": "聪/字节",
     "sats": "聪"

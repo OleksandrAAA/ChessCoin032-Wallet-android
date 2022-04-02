@@ -293,6 +293,7 @@ const WalletDetails = () => {
     if (backdoorPressed < 10) return setBackdoorPressed(backdoorPressed + 1);
     setBackdoorPressed(0);
     if (wallet.type !== HDSegwitBech32Wallet.type) return;
+
     const fileName = 'wallet-externals.json';
     const contents = JSON.stringify(
       {

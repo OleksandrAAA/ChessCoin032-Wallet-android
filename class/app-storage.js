@@ -222,7 +222,7 @@ export class AppStorage {
   async loadFromDisk(password) {
     let data = await this.getItem('data');
 
-    console.log(data);
+    //console.log('wallet data=', data);
 
     if (password) {
       data = this.decryptData(data, password);
@@ -557,6 +557,7 @@ export class AppStorage {
    * @return {Array}
    */
   getTransactions = (index, limit = Infinity, includeWalletsWithHideTransactionsEnabled = false) => {
+
     if (index || index === 0) {
       let txs = [];
       let c = 0;
@@ -565,6 +566,7 @@ export class AppStorage {
           txs = txs.concat(wallet.getTransactions());
         }
       }
+
       return txs;
     }
 

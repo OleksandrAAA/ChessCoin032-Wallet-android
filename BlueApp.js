@@ -10,7 +10,7 @@ const BlueApp: AppStorage = new AppStorage();
 let unlockAttempt = 0;
 
 const startAndDecrypt = async retry => {
-  console.log('startAndDecrypt');
+
   if (BlueApp.getWallets().length > 0) {
     console.log('App already has some wallets, so we are in already started state, exiting startAndDecrypt');
     return true;

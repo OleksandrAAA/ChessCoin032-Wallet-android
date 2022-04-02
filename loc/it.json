@@ -445,6 +445,7 @@
   },
   "units": {
     "BTC": "BTC",
+    "CHESS": "CHESS",
     "MAX": "Max",
     "sat_byte": "sat/byte",
     "sats": "sat"

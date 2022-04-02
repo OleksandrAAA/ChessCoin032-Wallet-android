@@ -1,4 +1,6 @@
 import { HDLegacyP2PKHWallet } from './hd-legacy-p2pkh-wallet';
+import { randomBytes } from '../rng';
+import bip39 from 'bip39';
 
 const bitcoin = require('bitcoinjs-lib');
 const mn = require('electrum-mnemonic');
@@ -7,6 +9,7 @@ const HDNode = require('bip32');
 const PREFIX = mn.PREFIXES.standard;
 const MNEMONIC_TO_SEED_OPTS = {
   prefix: PREFIX,
+  skipCheck: true,
 };
 
 /**
@@ -24,19 +27,20 @@ export class HDLegacyElectrumSeedP2PKHWallet extends HDLegacyP2PKHWallet {
     return mn.validateMnemonic(this.secret, PREFIX);
   }
 
+  /*
   async generate() {
     //throw new Error('Not implemented 14');
-  }
+    const buf = await randomBytes(16);
+    this.secret = bip39.entropyToMnemonic(buf.toString('hex'));
+    console.log('hd-legacy-electrum-seed-p2pkh-wallet.js:33 => generate =>' + this.secret.toString());
+  }*/
 
   getXpub() {
     if (this._xpub) {
       return this._xpub; // cache hit
     }
     const root = bitcoin.bip32.fromSeed(mn.mnemonicToSeedSync(this.secret, MNEMONIC_TO_SEED_OPTS));
-    console.log('hd-legacy-electrum-seed-p2pkh-wallet.js:36 root = ', root);
-
     this._xpub = root.neutered().toBase58();
-    console.log('hd-legacy-electrum-seed-p2pkh-wallet.js:39 _xpub = ', _xpub);
 
     return this._xpub;
   }
@@ -57,7 +61,7 @@ export class HDLegacyElectrumSeedP2PKHWallet extends HDLegacyP2PKHWallet {
     index = index * 1; // cast to int
     if (this.external_addresses_cache[index]) return this.external_addresses_cache[index]; // cache hit
 
-    const node = bitcoin.bip32.fromBase58(this.getXpub());
+    const node = bitcoin.bip32.fromBase58(this.getXpub());   
     const address = bitcoin.payments.p2pkh({
       pubkey: node.derive(0).derive(index).publicKey,
     }).address;

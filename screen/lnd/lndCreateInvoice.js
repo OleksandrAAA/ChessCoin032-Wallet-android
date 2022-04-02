@@ -40,7 +40,7 @@ const LNDCreateInvoice = () => {
   const { name } = useRoute();
   const { colors } = useTheme();
   const { navigate, dangerouslyGetParent, goBack, pop, setParams } = useNavigation();
-  const [unit, setUnit] = useState(wallet.current?.getPreferredBalanceUnit() || BitcoinUnit.BTC);
+  const [unit, setUnit] = useState(wallet.current?.getPreferredBalanceUnit() || BitcoinUnit.CHESS);
   const [amount, setAmount] = useState();
   const [renderWalletSelectionButtonHidden, setRenderWalletSelectionButtonHidden] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -154,7 +154,7 @@ const LNDCreateInvoice = () => {
         case BitcoinUnit.SATS:
           invoiceAmount = parseInt(invoiceAmount); // basically nop
           break;
-        case BitcoinUnit.BTC:
+        case BitcoinUnit.CHESS:
           invoiceAmount = currency.btcToSatoshi(invoiceAmount);
           break;
         case BitcoinUnit.LOCAL_CURRENCY:
@@ -251,7 +251,7 @@ const LNDCreateInvoice = () => {
         case BitcoinUnit.SATS:
           // nop
           break;
-        case BitcoinUnit.BTC:
+        case BitcoinUnit.CHESS:
           amount = currency.satoshiToBTC(amount);
           break;
         case BitcoinUnit.LOCAL_CURRENCY:

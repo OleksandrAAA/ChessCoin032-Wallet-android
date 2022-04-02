@@ -45,7 +45,7 @@ const ReceiveDetails = () => {
   const wallet = wallets.find(w => w.getID() === walletID);
   const [customLabel, setCustomLabel] = useState();
   const [customAmount, setCustomAmount] = useState(0);
-  const [customUnit, setCustomUnit] = useState(BitcoinUnit.BTC);
+  const [customUnit, setCustomUnit] = useState(BitcoinUnit.CHESS);
   const [bip21encoded, setBip21encoded] = useState();
   const [isCustom, setIsCustom] = useState(false);
   const [isCustomModalVisible, setIsCustomModalVisible] = useState(false);
@@ -244,6 +244,7 @@ const ReceiveDetails = () => {
           saveToDisk(); // caching whatever getAddressAsync() generated internally
         }
       }
+
       setAddressBIP21Encoded(newAddress);
       await Notifications.tryToObtainPermissions();
       Notifications.majorTomToGroundControl([newAddress], [], []);
@@ -307,7 +308,7 @@ const ReceiveDetails = () => {
     setIsCustomModalVisible(false);
     let amount = customAmount;
     switch (customUnit) {
-      case BitcoinUnit.BTC:
+      case BitcoinUnit.CHESS:
         // nop
         break;
       case BitcoinUnit.SATS:
@@ -361,7 +362,7 @@ const ReceiveDetails = () => {
   };
 
   const handleShareButtonPressed = () => {
-    let shareAddress = bip21encoded.replace("bitcoin", "chess")
+    let shareAddress = bip21encoded.replace("bitcoin", "chesscoin")
     console.log("======share new::", shareAddress)
     Share.open({ message: shareAddress }).catch(error => console.log(error));
   };
@@ -371,7 +372,7 @@ const ReceiveDetails = () => {
    */
   const getDisplayAmount = () => {
     switch (customUnit) {
-      case BitcoinUnit.BTC:
+      case BitcoinUnit.CHESS:
         return customAmount + ' CHESS';
       case BitcoinUnit.SATS:
         return currency.satoshiToBTC(customAmount) + ' CHESS';

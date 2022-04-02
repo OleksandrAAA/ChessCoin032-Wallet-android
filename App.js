@@ -209,7 +209,6 @@ const App = () => {
     for (const payload of notifications2process) {
       const wasTapped = payload.foreground === false || (payload.foreground === true && payload.userInteraction);
 
-      console.log('processing push notification:', payload);
       let wallet;
       switch (+payload.type) {
         case 2:

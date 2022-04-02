@@ -26,6 +26,7 @@ import {
   BlueButtonLink,
   BlueCard,
   BlueLoading,
+  BlueSpacing10,
   BlueSpacing20,
   BlueText,
   SafeBlueArea,
@@ -324,7 +325,11 @@ export default class ElectrumSettings extends Component {
                   onBlur={() => this.setState({ isAndroidNumericKeyboardFocused: false })}
                 />
               </View>
-
+              <BlueSpacing10 />
+              <View style={styles.serverAddTitle}>
+                <BlueText style={styles.explain}>Blockchain: {this.state.config.blocks} blocks</BlueText>
+              </View>
+              <BlueSpacing10 />
               <View style={styles.serverAddTitle}>
                 <BlueText style={styles.explain}>{loc.settings.electrum_settings_explain}</BlueText>
                 <TouchableOpacity testID="ResetToDefault" onPress={() => this.resetToDefault()}>
@@ -464,6 +469,8 @@ const styles = StyleSheet.create({
     minHeight: 36,
     color: '#81868e',
     height: 36,
+    paddingVertical:10,
+    lineHeight: 40,
   },
   serverAddTitle: {
     flexDirection: 'row',

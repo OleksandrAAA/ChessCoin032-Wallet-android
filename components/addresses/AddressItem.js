@@ -20,7 +20,7 @@ const AddressItem = ({ item, balanceUnit, onPress }) => {
       backgroundColor: colors.elevated,
     },
     list: {
-      color: colors.buttonTextColor,
+      color: colors.foregroundColor,
     },
     index: {
       color: colors.alternativeTextColor,

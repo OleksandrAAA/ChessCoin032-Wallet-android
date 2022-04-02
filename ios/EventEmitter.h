@@ -1,9 +1,9 @@
 //
 //  EventEmitter.h
-//  BlueWallet
+//  Chess032Wallet
 //
 //  Created by Marcos Rodriguez on 12/25/20.
-//  Copyright © 2020 BlueWallet. All rights reserved.
+//  Copyright © 2020 Chess032Wallet. All rights reserved.
 //
 
 #import <React/RCTBridgeModule.h>
