@@ -287,7 +287,6 @@ module.exports.getBalanceByAddress = async function (address) {
 };
 
 module.exports.getConfig = async function (subscribe) {
-  console.log('getConfig: flag = ', subscribe);
   
   if (!mainClient) throw new Error('Electrum client is not connected');
 
@@ -722,12 +721,11 @@ module.exports.calcEstimateFeeFromFeeHistorgam = function (numberOfBlocks, feeHi
 };
 
 module.exports.estimateFees = async function () {
-  let histogram;
-  try {
-    histogram = await Promise.race([mainClient.mempool_getFeeHistogram(), new Promise(resolve => setTimeout(resolve, 29000))]);
-  } catch (_) {}
-
-  if (!histogram) throw new Error('timeout while getting mempool_getFeeHistogram');
+  //let histogram;
+  //try {
+  //  histogram = await Promise.race([mainClient.mempool_getFeeHistogram(), new Promise(resolve => setTimeout(resolve, 29000))]);
+  //} catch (_) {}
+  //if (!histogram) throw new Error('timeout while getting mempool_getFeeHistogram');
 
   // fetching what electrum (which uses bitcoin core) thinks about fees:
   //const _fast = await module.exports.estimateFee(1);
@@ -738,10 +736,11 @@ module.exports.estimateFees = async function () {
   //const fast = 100000; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
   //const medium = 1000; //Math.max(1, Math.round((fast * _medium) / _fast));
   //const slow = 100; //Math.max(1, Math.round((fast * _slow) / _fast));
-  const fast = 44200; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
-  const medium = 442; //Math.max(1, Math.round((fast * _medium) / _fast));
-  const slow = 44.2; //Math.max(1, Math.round((fast * _slow) / _fast));
-  return { fast, medium, slow };
+  //const fast = 44.25; //module.exports.calcEstimateFeeFromFeeHistorgam(1, histogram);
+  //const medium = 44.25; //Math.max(1, Math.round((fast * _medium) / _fast));
+  const slow = 100; //Math.max(1, Math.round((fast * _slow) / _fast));
+  //return { fast, medium, slow };
+  return {  slow, slow, slow };
 };
 
 /**

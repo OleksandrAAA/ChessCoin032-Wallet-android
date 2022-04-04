@@ -37,29 +37,78 @@ const TransactionsDetails = () => {
   const { colors } = useTheme();
   const openTransactionOnBlockExplorerRef = useRef();
   const toolTip = useRef();
-  const stylesHooks = StyleSheet.create({
+
+  const styles = StyleSheet.create({
+    scroll: {
+      flex: 1,
+    },
+    rowHeader: {
+      flex: 1,
+      flexDirection: 'row',
+      marginBottom: 4,
+      justifyContent: 'space-between',
+    },
     rowCaption: {
+      fontSize: 16,
+      fontWeight: '500',
+      marginBottom: 4,
       color: colors.foregroundColor,
     },
+    rowValue: {
+      marginBottom: 26,
+      color: 'grey',
+    },
     txId: {
+      fontSize: 16,
+      fontWeight: '500',
       color: colors.foregroundColor,
+    },
+    txHash: {
+      marginBottom: 8,
+      color: 'grey',
     },
     txLink: {
       color: colors.alternativeTextColor2,
+    },
+    Link: {
+      fontWeight: '600',
+      fontSize: 15,
+      color: colors.buttonTextColor,
+    },
+    save: {
+      marginHorizontal: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     saveText: {
       color: colors.alternativeTextColor2,
     },
     memoTextInput: {
+      flexDirection: 'row',
+      borderWidth: 1,
+      borderBottomWidth: 0.5,
+      minHeight: 44,
+      height: 44,
+      alignItems: 'center',
+      marginVertical: 8,
+      borderRadius: 4,
+      paddingHorizontal: 8,
+      color: '#81868e',
       borderColor: colors.formBorder,
       borderBottomColor: colors.formBorder,
       backgroundColor: colors.inputBackgroundColor,
     },
     greyButton: {
+      borderRadius: 9,
+      minHeight: 49,
+      paddingHorizontal: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      alignSelf: 'auto',
+      flexGrow: 1,
+      marginHorizontal: 4,
       backgroundColor: colors.buttonBackgroundColor,
-    },
-    Link: {
-      color: colors.buttonTextColor,
     },
   });
 
@@ -67,7 +116,7 @@ const TransactionsDetails = () => {
     setOptions({
       headerRight: () => (
         <TouchableOpacity disabled={isLoading} style={styles.save} onPress={handleOnSaveButtonTapped}>
-          <Text style={stylesHooks.saveText}>{loc.wallets.details_save}</Text>
+          <Text style={styles.saveText}>{loc.wallets.details_save}</Text>
         </TouchableOpacity>
       ),
       headerStyle: {
@@ -146,9 +195,9 @@ const TransactionsDetails = () => {
   return (
     <SafeBlueArea>
       <HandoffComponent
-        title={`Bitcoin Transaction ${tx.hash}`}
+        title={`Chesscoin Transaction ${tx.hash}`}
         type="com.electrum.chess032wallet"
-        url={`https://blockstream.info/tx/${tx.hash}`}
+        url={`https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`}
       />
       <StatusBar barStyle="default" />
       <ScrollView style={styles.scroll}>
@@ -158,7 +207,7 @@ const TransactionsDetails = () => {
               placeholder={loc.send.details_note_placeholder}
               value={memo}
               placeholderTextColor="#81868e"
-              style={[styles.memoTextInput, stylesHooks.memoTextInput]}
+              style={[styles.memoTextInput, styles.memoTextInput]}
               onChangeText={setMemo}
             />
             <BlueSpacing20 />
@@ -167,7 +216,7 @@ const TransactionsDetails = () => {
           {from && (
             <>
               <View style={styles.rowHeader}>
-                <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_from}</BlueText>
+                <BlueText style={styles.rowCaption}>{loc.transactions.details_from}</BlueText>
                 <BlueCopyToClipboardButton stringToCopy={from.filter(onlyUnique).join(', ')} />
               </View>
               <BlueText style={styles.rowValue}>{from.filter(onlyUnique).join(', ')}</BlueText>
@@ -177,7 +226,7 @@ const TransactionsDetails = () => {
           {to && (
             <>
               <View style={styles.rowHeader}>
-                <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_to}</BlueText>
+                <BlueText style={styles.rowCaption}>{loc.transactions.details_to}</BlueText>
                 <BlueCopyToClipboardButton stringToCopy={to.filter(onlyUnique).join(', ')} />
               </View>
               <BlueText style={styles.rowValue}>{arrDiff(from, to.filter(onlyUnique)).join(', ')}</BlueText>
@@ -186,15 +235,15 @@ const TransactionsDetails = () => {
 
           {tx.fee && (
             <>
-              <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.send.create_fee}</BlueText>
-              <BlueText style={styles.rowValue}>{tx.fee + ' sats'}</BlueText>
+              <BlueText style={styles.rowCaption}>{loc.send.create_fee}</BlueText>
+              <BlueText style={styles.rowValue}>{tx.fee + ' CHESS'}</BlueText>
             </>
           )}
 
           {tx.hash && (
             <>
               <View style={styles.rowHeader}>
-                <BlueText style={[styles.txId, stylesHooks.txId]}>{loc.transactions.txid}</BlueText>
+                <BlueText style={styles.txId}>{loc.transactions.txid}</BlueText>
                 <BlueCopyToClipboardButton stringToCopy={tx.hash} />
               </View>
               <BlueText style={styles.rowValue}>{tx.hash}</BlueText>
@@ -203,28 +252,28 @@ const TransactionsDetails = () => {
 
           {tx.received && (
             <>
-              <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_received}</BlueText>
+              <BlueText style={styles.rowCaption}>{loc.transactions.details_received}</BlueText>
               <BlueText style={styles.rowValue}>{dayjs(tx.received).format('LLL')}</BlueText>
             </>
           )}
 
           {tx.block_height > 0 && (
             <>
-              <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_block}</BlueText>
+              <BlueText style={styles.rowCaption}>{loc.transactions.details_block}</BlueText>
               <BlueText style={styles.rowValue}>{tx.block_height}</BlueText>
             </>
           )}
 
           {tx.inputs && (
             <>
-              <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_inputs}</BlueText>
+              <BlueText style={styles.rowCaption}>{loc.transactions.details_inputs}</BlueText>
               <BlueText style={styles.rowValue}>{tx.inputs.length}</BlueText>
             </>
           )}
 
           {tx.outputs?.length > 0 && (
             <>
-              <BlueText style={[styles.rowCaption, stylesHooks.rowCaption]}>{loc.transactions.details_outputs}</BlueText>
+              <BlueText style={styles.rowCaption}>{loc.transactions.details_outputs}</BlueText>
               <BlueText style={styles.rowValue}>{tx.outputs.length}</BlueText>
             </>
           )}
@@ -243,76 +292,15 @@ const TransactionsDetails = () => {
             ref={openTransactionOnBlockExplorerRef}
             onPress={handleOnOpenTransactionOnBlockExporerTapped}
             onLongPress={showToolTipMenu}
-            style={[styles.greyButton, stylesHooks.greyButton]}
+            style={styles.greyButton}
           >
-            <Text style={[styles.Link, stylesHooks.Link]}>{loc.transactions.details_show_in_block_explorer}</Text>
+            <Text style={styles.Link}>{loc.transactions.details_show_in_block_explorer}</Text>
           </TouchableOpacity>
         </BlueCard>
       </ScrollView>
     </SafeBlueArea>
   );
 };
-
-const styles = StyleSheet.create({
-  scroll: {
-    flex: 1,
-  },
-  rowHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 4,
-    justifyContent: 'space-between',
-  },
-  rowCaption: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 4,
-  },
-  rowValue: {
-    marginBottom: 26,
-    color: 'grey',
-  },
-  txId: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  txHash: {
-    marginBottom: 8,
-    color: 'grey',
-  },
-  Link: {
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  save: {
-    marginHorizontal: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  memoTextInput: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderBottomWidth: 0.5,
-    minHeight: 44,
-    height: 44,
-    alignItems: 'center',
-    marginVertical: 8,
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    color: '#81868e',
-  },
-  greyButton: {
-    borderRadius: 9,
-    minHeight: 49,
-    paddingHorizontal: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    alignSelf: 'auto',
-    flexGrow: 1,
-    marginHorizontal: 4,
-  },
-});
 
 export default TransactionsDetails;
 

@@ -59,7 +59,8 @@ export const BlueButton = props => {
   const { colors } = useTheme();
 
   let backgroundColor = props.backgroundColor ? props.backgroundColor : colors.mainColor || BlueCurrentTheme.colors.mainColor;
-  let fontColor = props.buttonTextColor || colors.foregroundColor;
+  let fontColor = props.buttonTextColor || colors.buttonTextColor;
+  
   if (props.disabled === true) {
     backgroundColor = colors.buttonDisabledBackgroundColor;
     fontColor = colors.buttonDisabledTextColor;
@@ -1427,8 +1428,7 @@ export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = Bitco
       },
     ];
 
-    console.log('* BlueComponents.js:1430: item.hash = ', item.hash);
-
+    console.log('* BlueComponents.js:1428: item.hash = ', item.hash);
     if (item.hash) {
       actions.push({
         id: 'open_in_blockExplorer',

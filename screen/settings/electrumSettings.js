@@ -79,7 +79,7 @@ export default class ElectrumSettings extends Component {
     const inverval = setInterval(async () => {
       this.setState({
         config: await BlueElectrum.getConfig(isMounted),
-      }, console.log('setState for config timer: ', isMounted));
+      });
     }, 1000);
 
     this.setState({

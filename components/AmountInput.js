@@ -124,20 +124,9 @@ class AmountInput extends Component {
 
   handleChangeText = text => {
     text = text.trim();
+
     if (this.props.unit !== BitcoinUnit.LOCAL_CURRENCY) {
       text = text.replace(',', '.');
-      const split = text.split('.');
-      if (split.length >= 2) {
-        text = `${parseInt(split[0], 10)}.${split[1]}`;
-        console.log("=====change amount111::", text, this.props.unit);
-      } else {
-        text = `${parseInt(split[0], 10)}`;
-        console.log("=====change amount222::", text, this.props.unit);
-      }
-
-      console.log("=====change amount::", text, this.props.unit);
-      text = this.props.unit === (BitcoinUnit.BTC || BitcoinUnit.CHESS) ? text.replace(/[^0-9.]/g, '') : text.replace(/[^0-9]/g, '');
-
       if (text.startsWith('.')) {
         text = '0.';
       }

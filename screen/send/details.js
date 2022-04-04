@@ -40,6 +40,7 @@ import AmountInput from '../../components/AmountInput';
 import InputAccessoryAllFunds from '../../components/InputAccessoryAllFunds';
 import { AbstractHDElectrumWallet } from '../../class/wallets/abstract-hd-electrum-wallet';
 import { BlueStorageContext } from '../../blue_modules/storage-context';
+import { color } from 'react-native-reanimated';
 const currency = require('../../blue_modules/currency');
 const prompt = require('../../blue_modules/prompt');
 const fs = require('../../blue_modules/fs');
@@ -67,7 +68,7 @@ const SendDetails = () => {
   const [addresses, setAddresses] = useState([]);
   const [units, setUnits] = useState([]);
   const [memo, setMemo] = useState('');
-  const [networkTransactionFees, setNetworkTransactionFees] = useState(new NetworkTransactionFee(3, 2, 1));
+  const [networkTransactionFees, setNetworkTransactionFees] = useState(new NetworkTransactionFee(1, 1, 1));
   const [networkTransactionFeesIsLoading, setNetworkTransactionFeesIsLoading] = useState(false);
   const [customFee, setCustomFee] = useState(null);
   const [feePrecalc, setFeePrecalc] = useState({ current: null, slowFee: null, mediumFee: null, fastestFee: null });
@@ -82,17 +83,7 @@ const SendDetails = () => {
   // if cutomFee is not set, we need to choose highest possible fee for wallet balance
   // if there are no funds for even Slow option, use 1 sat/byte fee
   const feeRate = useMemo(() => {
-    if (customFee) return customFee;
-    if (feePrecalc.slowFee === null) return '1'; // wait for precalculated fees
-    let initialFee;
-    if (feePrecalc.slowFee !== null) {
-      initialFee = String(networkTransactionFees.slowFee);
-    } else if (feePrecalc.mediumFee !== null) {
-      initialFee = String(networkTransactionFees.mediumFee);
-    } else {
-      initialFee = String(networkTransactionFees.fastestFee);
-    }
-    return initialFee;
+    return '44.25';
   }, [customFee, feePrecalc, networkTransactionFees]);
 
   // keyboad effects
@@ -214,8 +205,6 @@ const SendDetails = () => {
     const options = [
       { key: 'current', fee: requestedSatPerByte },
       { key: 'slowFee', fee: fees.slowFee },
-      { key: 'mediumFee', fee: fees.mediumFee },
-      { key: 'fastestFee', fee: fees.fastestFee },
     ];
 
     const newFeePrecalc = { ...feePrecalc };
@@ -230,6 +219,7 @@ const SendDetails = () => {
           break;
         }
         const value = parseInt(transaction.amountSats);
+
         if (value > 0) {
           targets.push({ address: transaction.address, value });
         } else if (transaction.amount) {
@@ -254,13 +244,15 @@ const SendDetails = () => {
         }
       });
 
+      let fee_factor = 2.26;
       let flag = false;
+
       while (true) {
         try {
-          const { fee } = wallet.coinselect(lutxo, targets, opt.fee, changeAddress);
-          
-          newFeePrecalc[opt.key] = fee;
-          tempFee[opt.key] = fee;
+          const { fee } = wallet.coinselect(lutxo, targets, opt.fee, changeAddress);         
+
+          newFeePrecalc[opt.key] = fee / fee_factor;
+          tempFee[opt.key] = fee / fee_factor;
           break;
         } catch (e) {
           if (e.message.includes('Not enough') && !flag) {
@@ -276,10 +268,13 @@ const SendDetails = () => {
       }
     }
 
-    tempFee.current = tempFee.slowFee;
+    // Fix 10000 for 0.0001 CHESS
+    newFeePrecalc.current = newFeePrecalc.slowFee = newFeePrecalc.fastestFee = newFeePrecalc.mediumFee = 10000;
+    tempFee.current = tempFee.slowFee = tempFee.fastestFee = tempFee.mediumFee = 10000;
+
     firstLoading? setFeePrecalc(newFeePrecalc) : setFeePrecalc(tempFee);
      
-  }, [wallet, networkTransactionFees, utxo, addresses, feeRate, dumb]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [wallet, networkTransactionFees, utxo, addresses, feeRate, dumb]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getChangeAddressFast = () => {
     if (changeAddress) return changeAddress; // cache
@@ -894,7 +889,7 @@ const SendDetails = () => {
       backgroundColor: colors.inputBackgroundColor,
     },
     feeLabel: {
-      color: colors.feeText,
+      color: colors.foregroundColor,
     },
     feeRow: {
       backgroundColor: colors.feeLabel,
@@ -920,7 +915,7 @@ const SendDetails = () => {
         fee: feePrecalc.mediumFee,
         rate: nf.mediumFee,
         active: Number(feeRate) === nf.mediumFee,
-      },
+      }, 
       {
         label: loc.send.fee_slow,
         time: loc.send.fee_1d,
@@ -1116,7 +1111,7 @@ const SendDetails = () => {
             onPress={() => navigation.navigate('SelectWallet', { onWalletSelect, chainType: Chain.ONCHAIN })}
           >
             <Text style={styles.selectText}>{loc.wallets.select_wallet.toLowerCase()}</Text>
-            <Icon name={I18nManager.isRTL ? 'angle-left' : 'angle-right'} size={18} type="font-awesome" color="#9aa0aa" />
+            <Icon name={I18nManager.isRTL ? 'angle-left' : 'angle-right'} size={20} type="font-awesome" color="#303030" />
           </TouchableOpacity>
         )}
         <View style={styles.selectWrap}>
@@ -1262,15 +1257,7 @@ const SendDetails = () => {
               />
             </View>
             <BlueSpacing20/>
-            <TouchableOpacity
-              testID="chooseFee"
-              onPress={() => {
-                setIsFeeSelectionModalVisible(true);
-                setFirstLoading(true);
-              }}
-              disabled={isLoading}
-              style={styles.fee}
-            >
+            <View style={styles.fee}>
               <Text style={[styles.feeLabel, stylesHook.feeLabel]}>{loc.send.create_fee}</Text>
 
               {networkTransactionFeesIsLoading ? (
@@ -1282,7 +1269,7 @@ const SendDetails = () => {
                   </Text>
                 </View>
               )}
-            </TouchableOpacity>            
+            </View>            
             <BlueSpacing20/>
             {renderCreateButton()}
             {renderFeeSelectionModal()}
@@ -1382,8 +1369,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectText: {
-    color: '#9aa0aa',
-    fontSize: 14,
+    color: '#303030',
+    fontSize: 18,
     marginRight: 8,
   },
   selectWrap: {
@@ -1392,7 +1379,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   selectLabel: {
-    fontSize: 14,
+    fontSize: 16,
   },
   of: {
     alignSelf: 'flex-end',
@@ -1424,10 +1411,11 @@ const styles = StyleSheet.create({
   },
   feeLabel: {
     fontSize: 14,
+    color: color.foregroundColor,
   },
   feeRow: {
     minWidth: 40,
-    height: 25,
+    height: 30,
     borderRadius: 4,
     justifyContent: 'space-between',
     flexDirection: 'row',

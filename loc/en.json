@@ -202,7 +202,7 @@
     "fee_medium": "Medium",
     "fee_replace_min": "The total fee rate (satoshi per byte) you want to pay should be higher than {min} sat/byte.",
     "fee_satbyte": "in sat/byte",
-    "fee_slow": "Slow",
+    "fee_slow": "Fee",
     "header": "Send",
     "input_clear": "Clear",
     "input_done": "Done",

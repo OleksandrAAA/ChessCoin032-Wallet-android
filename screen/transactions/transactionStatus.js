@@ -350,7 +350,7 @@ const TransactionsStatus = () => {
           {renderRBFCancel()}
           <TouchableOpacity style={styles.details} onPress={navigateToTransactionDetials}>
             <Text style={styles.detailsText}>{loc.send.create_details.toLowerCase()}</Text>
-            <Icon name={I18nManager.isRTL ? 'angle-left' : 'angle-right'} size={18} type="font-awesome" color="#9aa0aa" />
+            <Icon name={I18nManager.isRTL ? 'angle-left' : 'angle-right'} size={20} type="font-awesome" color="#303030" />
           </TouchableOpacity>
         </View>
       </View>
@@ -419,15 +419,15 @@ const styles = StyleSheet.create({
   },
   confirmations: {
     borderRadius: 11,
-    width: 109,
-    height: 21,
+    width: 160,
+    height: 30,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
   confirmationsText: {
-    color: '#9aa0aa',
-    fontSize: 11,
+    color: '#303030',
+    fontSize: 14,
   },
   actions: {
     alignSelf: 'center',
@@ -449,8 +449,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   detailsText: {
-    color: '#9aa0aa',
-    fontSize: 14,
+    color: '#303030',
+    fontSize: 16,
     marginRight: 8,
   },
 });
