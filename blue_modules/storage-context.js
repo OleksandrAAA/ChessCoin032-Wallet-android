@@ -100,11 +100,11 @@ export const BlueStorageProvider = ({ children }) => {
       const balanceStart = +new Date();
       await fetchWalletBalances(lastSnappedTo);
       const balanceEnd = +new Date();
-      console.log('fetch balance took', (balanceEnd - balanceStart) / 1000, 'sec');
+      console.log('storage-context.js:103: fetch balance took', (balanceEnd - balanceStart) / 1000, 'sec');
       const start = +new Date();
       await fetchWalletTransactions(lastSnappedTo);
       const end = +new Date();
-      console.log('fetch tx took', (end - start) / 1000, 'sec');
+      console.log('storage-context.js:107: fetch tx took', (end - start) / 1000, 'sec');
     } catch (err) {
       noErr = false;
       console.warn('storage-context.js:110', err);

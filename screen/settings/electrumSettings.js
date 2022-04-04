@@ -38,7 +38,9 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const BlueElectrum = require('../../blue_modules/BlueElectrum');
 
-export default class ElectrumSettings extends Component {
+export default class ElectrumSettings extends Component { 
+  isMounted = false;
+
   constructor(props) {
     super(props);
     const server = props?.route?.params?.server;
@@ -51,10 +53,13 @@ export default class ElectrumSettings extends Component {
   }
 
   componentWillUnmount() {
+    isMounted = false;
     clearInterval(this.state.inverval);
   }
 
   async componentDidMount() {
+    isMounted = true;
+
     const host = await AsyncStorage.getItem(AppStorage.ELECTRUM_HOST);
     const port = await AsyncStorage.getItem(AppStorage.ELECTRUM_TCP_PORT);
     const sslPort = await AsyncStorage.getItem(AppStorage.ELECTRUM_SSL_PORT);
@@ -73,12 +78,12 @@ export default class ElectrumSettings extends Component {
 
     const inverval = setInterval(async () => {
       this.setState({
-        config: await BlueElectrum.getConfig(),
-      });
-    }, 500);
+        config: await BlueElectrum.getConfig(isMounted),
+      }, console.log('setState for config timer: ', isMounted));
+    }, 1000);
 
     this.setState({
-      config: await BlueElectrum.getConfig(),
+      config: await BlueElectrum.getConfig(isMounted),
       inverval,
     });
 
@@ -327,7 +332,7 @@ export default class ElectrumSettings extends Component {
               </View>
               <BlueSpacing10 />
               <View style={styles.serverAddTitle}>
-                <BlueText style={styles.explain}>Blockchain: {this.state.config.blocks} blocks</BlueText>
+                <BlueText style={styles.explain}>Blockchain: { this.state.config.blocks} blocks</BlueText>
               </View>
               <BlueSpacing10 />
               <View style={styles.serverAddTitle}>

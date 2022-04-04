@@ -56,7 +56,7 @@ const TransactionsDetails = () => {
       backgroundColor: colors.inputBackgroundColor,
     },
     greyButton: {
-      backgroundColor: colors.lightButton,
+      backgroundColor: colors.buttonBackgroundColor,
     },
     Link: {
       color: colors.buttonTextColor,
@@ -125,16 +125,14 @@ const TransactionsDetails = () => {
   };
 
   const handleOnOpenTransactionOnBlockExporerTapped = () => {
-    const url = `https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`;
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      }
-    });
+    //const url = `https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`;
+    const url = `https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`;
+    Linking.openURL(url);
   };
 
   const handleCopyPress = () => {
-    Clipboard.setString(`https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`);
+    //Clipboard.setString(`https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`);
+    Clipboard.setString(`https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`);
   };
 
   const showToolTipMenu = () => {

@@ -59,7 +59,7 @@ export const BlueButton = props => {
   const { colors } = useTheme();
 
   let backgroundColor = props.backgroundColor ? props.backgroundColor : colors.mainColor || BlueCurrentTheme.colors.mainColor;
-  let fontColor = props.buttonTextColor || colors.buttonTextColor;
+  let fontColor = props.buttonTextColor || colors.foregroundColor;
   if (props.disabled === true) {
     backgroundColor = colors.buttonDisabledBackgroundColor;
     fontColor = colors.buttonDisabledTextColor;
@@ -1406,7 +1406,8 @@ export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = Bitco
   const handleOnCopyTransactionID = useCallback(() => Clipboard.setString(item.hash), [item.hash]);
   const handleOnCopyNote = useCallback(() => Clipboard.setString(subtitle), [subtitle]);
   const handleOnViewOnBlockExplorer = useCallback(() => {
-    const url = `https://chainz.cryptoid.info/chess/block.dws?${item.hash}.htm`;
+    //const url = `https://chainz.cryptoid.info/chess/block.dws?${item.hash}.htm`;
+    const url = `https://chainz.cryptoid.info/chess/tx.dws?${item.hash}.htm`;
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -1414,7 +1415,8 @@ export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = Bitco
     });
   }, [item.hash]);
   const handleCopyOpenInBlockExplorerPress = useCallback(() => {
-    Clipboard.setString(`https://chainz.cryptoid.info/chess/block.dws?${item.hash}.htm`);
+    //Clipboard.setString(`https://chainz.cryptoid.info/chess/block.dws?${item.hash}.htm`);
+    Clipboard.setString(`https://chainz.cryptoid.info/chess/tx.dws?${item.hash}.htm`);
   }, [item.hash]);
   const toolTipActions = useMemo(() => {
     const actions = [
@@ -1424,6 +1426,9 @@ export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = Bitco
         onPress: handleOnCopyTap,
       },
     ];
+
+    console.log('* BlueComponents.js:1430: item.hash = ', item.hash);
+
     if (item.hash) {
       actions.push({
         id: 'open_in_blockExplorer',

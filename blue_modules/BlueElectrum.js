@@ -286,8 +286,20 @@ module.exports.getBalanceByAddress = async function (address) {
   return balance;
 };
 
-module.exports.getConfig = async function () {
+module.exports.getConfig = async function (subscribe) {
+  console.log('getConfig: flag = ', subscribe);
+  
   if (!mainClient) throw new Error('Electrum client is not connected');
+
+  if (subscribe)
+  {
+    const header = await mainClient.blockchainHeaders_subscribe();
+    if (header && header.height) {
+      latestBlockheight = header.height;
+      console.log('[* BlueElectrum.js:132] latestBlockheight = ', latestBlockheight);
+    }
+  }
+
   return {
     host: mainClient.host,
     port: mainClient.port,
