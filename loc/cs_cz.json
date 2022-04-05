@@ -370,7 +370,7 @@
     "updating": "Aktualizace..."
   },
   "wallets": {
-    "add_bitcoin": "Bitcoin",
+    "add_bitcoin": "Chesscoin",
     "add_bitcoin_explain": "Jednoduchá a výkonná bitcoinová peněženka",
     "add_create": "Vytvořit",
     "add_entropy_generated": "{gen} bajtů generované entropie",
@@ -386,7 +386,7 @@
     "add_title": "přidat peněženku",
     "add_wallet_name": "název peněženky",
     "add_wallet_type": "typ",
-    "clipboard_bitcoin": "Ve své schránce máte bitcoinovou adresu. Chcete jej použít pro transakci?",
+    "clipboard_chesscoin": "Ve své schránce máte bitcoinovou adresu. Chcete jej použít pro transakci?",
     "clipboard_lightning": "Ve schránce máte Lightning fakturu. Chcete ji použít pro transakci?",
     "details_address": "Adresa",
     "details_advanced": "Pokročilé",

@@ -374,8 +374,8 @@
     "updating": "Updating..."
   },
   "wallets": {
-    "add_bitcoin": "CHESS032",
-    "add_bitcoin_explain": "Simple and powerful CHESS032wallet",
+    "add_bitcoin": "Chesscoin",
+    "add_bitcoin_explain": "Simple and powerful Chesscoin",
     "add_create": "Create",
     "add_entropy_generated": "{gen} bytes of generated entropy",
     "add_entropy_provide": "Provide entropy via dice rolls",
@@ -390,7 +390,7 @@
     "add_title": "Add Wallet",
     "add_wallet_name": "Name",
     "add_wallet_type": "Type",
-    "clipboard_bitcoin": "You have a ChessCoin032 address on your clipboard. Would you like to use it for a transaction?",
+    "clipboard_chesscoin": "You have a ChessCoin032 address on your clipboard. Would you like to use it for a transaction?",
     "clipboard_lightning": "You have a Lightning invoice on your clipboard. Would you like to use it for a transaction?",
     "details_address": "Address",
     "details_advanced": "Advanced",

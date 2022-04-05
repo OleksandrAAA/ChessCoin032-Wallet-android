@@ -116,7 +116,7 @@ const SendDetails = () => {
     }
     const wallet = (routeParams.walletID && wallets.find(w => w.getID() === routeParams.walletID)) || suitable[0];
 
-    console.log('* wallet = ', Wallet);
+    console.log('* wallet = ', wallet);
 
     setWallet(wallet);
     setFeeUnit(wallet.getPreferredBalanceUnit());

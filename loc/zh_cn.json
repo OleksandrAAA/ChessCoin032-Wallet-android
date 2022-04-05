@@ -383,7 +383,7 @@
     "add_title": "添加钱包",
     "add_wallet_name": "名称",
     "add_wallet_type": "类型",
-    "clipboard_bitcoin": "您的剪贴板上有一个比特币地址。您想使用它进行交易吗？",
+    "clipboard_chesscoin": "您的剪贴板上有一个比特币地址。您想使用它进行交易吗？",
     "clipboard_lightning": "您的剪贴板上有一张闪电賬單。 您想使用它进行交易吗？",
     "details_address": "地址",
     "details_advanced": "进阶的",
