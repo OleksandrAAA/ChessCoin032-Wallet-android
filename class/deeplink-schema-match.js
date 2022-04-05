@@ -431,7 +431,7 @@ class DeeplinkSchemaMatch {
   }
 
   static bip21decode(uri) {
-    return bip21.decode(uri.replace('chesscoin:', ''));
+     return bip21.decode(uri.replace('CHESSCOIN:', 'chesscoin:'));
   }
 
   static bip21encode() {
@@ -440,6 +440,8 @@ class DeeplinkSchemaMatch {
   }
 
   static decodeBitcoinUri(uri) {
+    console.log('* decodeBitcoinUri: url: ', url);
+
     let amount = '';
     let parsedBitcoinUri = null;
     let address = uri || '';

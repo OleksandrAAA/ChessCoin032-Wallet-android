@@ -343,7 +343,15 @@ export class LegacyWallet extends AbstractWallet {
       algo = coinSelectSplit;
     }
 
+    console.log('* coinselect utxos:', utxos);
+    console.log('* coinselect targets:', targets);
+    console.log('* coinselect feeRate:', feeRate);
+
     const { inputs, outputs, fee } = algo(utxos, targets, feeRate);
+
+    console.log('* coinselect inputs:', inputs);
+    console.log('* coinselect outputs:', outputs);
+    console.log('* coinselect fee:', fee);
 
     // .inputs and .outputs will be undefined if no solution was found
     if (!inputs || !outputs) {

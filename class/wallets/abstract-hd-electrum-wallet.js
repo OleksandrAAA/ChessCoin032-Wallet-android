@@ -844,8 +844,15 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
    * @param masterFingerprint {number} Decimal number of wallet's master fingerprint
    * @returns {{outputs: Array, tx: Transaction, inputs: Array, fee: Number, psbt: Psbt}}
    */
-  createTransaction(utxos, targets, feeRate, changeAddress, sequence, skipSigning = false, masterFingerprint) {
+  createTransaction(utxos, targets, feeRate, changeAddress, sequence, skipSigning = false, masterFingerprint = null) {
     if (targets.length === 0) throw new Error('No destination provided');
+
+    console.log('** createTransaction calling ...');
+    console.log('** coinselect utxos:', utxos);
+    console.log('** coinselect targets:', targets);
+    console.log('** coinselect feeRate:', feeRate);
+    console.log('** coinselect changeAddress:', changeAddress);
+
     const { inputs, outputs, fee } = this.coinselect(utxos, targets, feeRate, changeAddress);
 
     sequence = sequence || AbstractHDElectrumWallet.defaultRBFSequence;
@@ -853,6 +860,8 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
     let c = 0;
     const keypairs = {};
     const values = {};
+
+    console.log('** skipSigning = ', skipSigning);
 
     inputs.forEach(input => {
       let keyPair;
@@ -869,19 +878,29 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
       }
 
       let masterFingerprintBuffer;
-      if (masterFingerprint) {
+      if (masterFingerprint != null) {
         let masterFingerprintHex = Number(masterFingerprint).toString(16);
         if (masterFingerprintHex.length < 8) masterFingerprintHex = '0' + masterFingerprintHex; // conversion without explicit zero might result in lost byte
         const hexBuffer = Buffer.from(masterFingerprintHex, 'hex');
         masterFingerprintBuffer = Buffer.from(reverse(hexBuffer));
+        console.log('* masterFingerprintBuffer1 = ', masterFingerprintBuffer);
       } else {
         masterFingerprintBuffer = Buffer.from([0x00, 0x00, 0x00, 0x00]);
+        console.log('* masterFingerprintBuffer2 = ', masterFingerprintBuffer);
       }
       // this is not correct fingerprint, as we dont know real fingerprint - we got zpub with 84/0, but fingerpting
       // should be from root. basically, fingerprint should be provided from outside  by user when importing zpub
 
+      console.log('* _addPsbtInput calling ....');
+      console.log('* _addPsbtInput psbt = ', psbt);
+      console.log('* _addPsbtInput input = ', input);
+      console.log('* _addPsbtInput sequence = ', sequence);
+      console.log('* _addPsbtInput masterFingerprintBuffer = ', masterFingerprintBuffer);
+
       psbt = this._addPsbtInput(psbt, input, sequence, masterFingerprintBuffer);
     });
+
+    console.log('* Input Foreach OK!');
 
     outputs.forEach(output => {
       // if output has no address - this is change output
@@ -895,7 +914,7 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
       const pubkey = this._getPubkeyByAddress(output.address);
       let masterFingerprintBuffer;
 
-      if (masterFingerprint) {
+      if (masterFingerprint != null) {
         let masterFingerprintHex = Number(masterFingerprint).toString(16);
         if (masterFingerprintHex.length < 8) masterFingerprintHex = '0' + masterFingerprintHex; // conversion without explicit zero might result in lost byte
         const hexBuffer = Buffer.from(masterFingerprintHex, 'hex');
@@ -925,6 +944,8 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
       psbt.addOutput(outputData);
     });
 
+    console.log('* Output Foreach OK!');
+
     if (!skipSigning) {
       // skiping signing related stuff
       for (let cc = 0; cc < c; cc++) {
@@ -936,13 +957,24 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
     if (!skipSigning) {
       tx = psbt.finalizeAllInputs().extractTransaction();
     }
+
+    console.log('** tx = ', tx);
+    console.log('** fee = ', fee);
+    console.log('** psbt = ', psbt);
+
     return { tx, inputs, outputs, fee, psbt };
   }
 
   _addPsbtInput(psbt, input, sequence, masterFingerprintBuffer) {
+    console.log('* _addPsbtInput calling2 ....');
+
     const pubkey = this._getPubkeyByAddress(input.address);
     const path = this._getDerivationPathByAddress(input.address);
     const p2wpkh = bitcoin.payments.p2wpkh({ pubkey });
+
+    console.log('* pubkey = ', pubkey);
+    console.log('* path = ', path);
+    console.log('* p2wpkh = ', p2wpkh);
 
     psbt.addInput({
       hash: input.txId,
@@ -960,6 +992,8 @@ export class AbstractHDElectrumWallet extends AbstractHDWallet {
         value: input.value,
       },
     });
+
+    console.log('* psbt = ', psbt);
 
     return psbt;
   }

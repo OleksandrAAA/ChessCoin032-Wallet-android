@@ -176,7 +176,7 @@ const WalletsList = () => {
   }, []); // call refreshTransactions() only once, when screen mounts
 
   const handleClick = index => {
-    console.log('click', index);
+    console.log('wallet click', index);
     const wallet = carouselData[index];
     if (wallet) {
       if (wallet.type === PlaceholderWallet.type) {

@@ -62,7 +62,7 @@ export default class PayjoinTransaction {
       }
       return '';
     } catch (e) {
-      return 'Error: ' + e.message;
+      return 'Error broadcastTx: ' + e.message;
     }
   }
 

@@ -130,6 +130,15 @@ class AmountInput extends Component {
       if (text.startsWith('.')) {
         text = '0.';
       }
+
+      const split = text.split('.');
+      if (split.length >= 2) {
+        text = `${parseInt(split[0], 10)}.${split[1]}`;
+      } else {
+        text = `${parseInt(split[0], 10)}`;
+      }
+
+      //text = this.props.unit === (BitcoinUnit.BTC || BitcoinUnit.CHESS) ? text.replace(/[^0-9.]/g, '') : text.replace(/[^0-9]/g, '');
     } else if (this.props.unit === BitcoinUnit.LOCAL_CURRENCY) {
       text = text.replace(/,/gi, '');
       if (text.split('.').length > 2) {

@@ -29,7 +29,7 @@ import { BlueButton, BlueDismissKeyboardInputAccessory, BlueListItem, BlueLoadin
 import { navigationStyleTx } from '../../components/navigationStyle';
 import NetworkTransactionFees, { NetworkTransactionFee } from '../../models/networkTransactionFees';
 import { BitcoinUnit, Chain } from '../../models/bitcoinUnits';
-import { HDSegwitBech32Wallet, MultisigHDWallet, WatchOnlyWallet } from '../../class';
+import { HDLegacyElectrumSeedP2PKHWallet, LegacyWallet, HDSegwitBech32Wallet, MultisigHDWallet, WatchOnlyWallet } from '../../class';
 import DocumentPicker from 'react-native-document-picker';
 import DeeplinkSchemaMatch from '../../class/deeplink-schema-match';
 import loc, { formatBalance, formatBalanceWithoutSuffix } from '../../loc';
@@ -83,7 +83,7 @@ const SendDetails = () => {
   // if cutomFee is not set, we need to choose highest possible fee for wallet balance
   // if there are no funds for even Slow option, use 1 sat/byte fee
   const feeRate = useMemo(() => {
-    return '44.25';
+    return '44';
   }, [customFee, feePrecalc, networkTransactionFees]);
 
   // keyboad effects
@@ -115,6 +115,9 @@ const SendDetails = () => {
       return;
     }
     const wallet = (routeParams.walletID && wallets.find(w => w.getID() === routeParams.walletID)) || suitable[0];
+
+    console.log('* wallet = ', Wallet);
+
     setWallet(wallet);
     setFeeUnit(wallet.getPreferredBalanceUnit());
     setAmountUnit(wallet.preferredBalanceUnit); // default for whole screen
@@ -251,10 +254,13 @@ const SendDetails = () => {
         try {
           const { fee } = wallet.coinselect(lutxo, targets, opt.fee, changeAddress);         
 
+          console.log('* fee = ', fee);
+
           newFeePrecalc[opt.key] = fee / fee_factor;
           tempFee[opt.key] = fee / fee_factor;
           break;
         } catch (e) {
+          console.log('exception: ', e.message);
           if (e.message.includes('Not enough') && !flag) {
             flag = true;
             // if we don't have enough funds, construct maximum possible transaction
@@ -267,6 +273,7 @@ const SendDetails = () => {
         }
       }
     }
+
 
     // Fix 10000 for 0.0001 CHESS
     newFeePrecalc.current = newFeePrecalc.slowFee = newFeePrecalc.fastestFee = newFeePrecalc.mediumFee = 10000;
@@ -383,30 +390,33 @@ const SendDetails = () => {
     Keyboard.dismiss();
     setIsLoading(true);
     const requestedSatPerByte = feeRate;
+
+    console.log('* createTransaction: addresses', {addresses});
+
     for (const [index, transaction] of addresses.entries()) {
       let error;
       if (!transaction.amount || transaction.amount < 0 || parseFloat(transaction.amount) === 0) {
         error = loc.send.details_amount_field_is_not_valid;
-        console.log('validation error');
+        console.log('validation error: ', error);
       // } else if (parseFloat(transaction.amountSats) <= 500) {
       //   error = loc.send.details_amount_field_is_less_than_minimum_amount_sat;
       //   console.log('validation error');
       } else if (!requestedSatPerByte || parseFloat(requestedSatPerByte) < 1) {
         error = loc.send.details_fee_field_is_not_valid;
-        console.log('validation error');
+        console.log('validation error: ', error);
       } else if (!transaction.address) {
         error = loc.send.details_address_field_is_not_valid;
-        console.log('validation error');
+        console.log('validation error: ', error);
       } else if (balance - transaction.amountSats < 0) {
         // first sanity check is that sending amount is not bigger than available balance
         error = loc.send.details_total_exceeds_balance;
-        console.log('validation error');
+        console.log('validation error: ', error);
       } else if (transaction.address) {
         const address = transaction.address.trim().toLowerCase();
         if (address.startsWith('lnb') || address.startsWith('lightning:lnb')) {
           error =
             'This address appears to be for a Lightning invoice. Please, go to your Lightning wallet in order to make a payment for this invoice.';
-          console.log('validation error');
+            console.log('validation error: ', error);
         }
       }
 
@@ -414,8 +424,7 @@ const SendDetails = () => {
         try {
           bitcoin.address.toOutputScript(transaction.address);
         } catch (err) {
-          console.log('validation error');
-          console.log(err);
+          console.log('validation error: ', err);
           error = loc.send.details_address_field_is_not_valid;
         }
       }
@@ -443,15 +452,22 @@ const SendDetails = () => {
     const requestedSatPerByte = Number(feeRate);
     const lutxo = utxo || wallet.getUtxo();
     console.log("====psbt createPsbtTransaction::", { requestedSatPerByte, lutxo: lutxo.length });
+    console.log('====psbt changeAddress::', changeAddress);
+    console.log('====psbt requestedSatPerByte::', requestedSatPerByte);
+    console.log('* createTransaction: addeesses = ', addresses);
 
     const targets = [];
     for (const transaction of addresses) {
+      console.log('* transaction.amount = ', transaction.amount);
+
       if (transaction.amount === BitcoinUnit.MAX) {
         // output with MAX
         targets.push({ address: transaction.address });
         continue;
       }
       const value = parseInt(transaction.amountSats);
+      console.log('* transaction.value = ', value);
+
       if (value > 0) {
         console.log("======psbt:transaction-1::", value, transaction.amount)
         targets.push({ address: transaction.address, value });
@@ -463,13 +479,18 @@ const SendDetails = () => {
       }
     }
 
+    console.log('======psbt:transaction: 479');
+
     const { tx, outputs, psbt, fee } = wallet.createTransaction(
       lutxo,
       targets,
       requestedSatPerByte,
       changeAddress,
       isTransactionReplaceable ? HDSegwitBech32Wallet.defaultRBFSequence : HDSegwitBech32Wallet.finalRBFSequence,
+      true,
     );
+
+    console.log('======psbt:transaction: 489');
 
     if (wallet.type === WatchOnlyWallet.type) {
       // watch-only wallets with enabled HW wallet support have different flow. we have to show PSBT to user as QR code
@@ -999,14 +1020,6 @@ const SendDetails = () => {
       <BottomModal deviceWidth={width + width / 2} isVisible={optionsVisible} onClose={hideOptions}>
         <KeyboardAvoidingView enabled={!Platform.isPad} behavior={Platform.OS === 'ios' ? 'position' : null}>
           <View style={[styles.optionsContent, stylesHook.optionsContent]}>
-            <BlueListItem
-              testID="sendMaxButton"
-              disabled={balance === 0 || isSendMaxUsed}
-              title={loc.send.details_adv_full}
-              hideChevron
-              component={TouchableOpacity}
-              onPress={onUseAllPressed}
-            />
             {wallet.type === HDSegwitBech32Wallet.type && (
               <BlueListItem
                 title={loc.send.details_adv_fee_bump}

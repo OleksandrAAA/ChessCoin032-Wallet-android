@@ -245,7 +245,7 @@ const App = () => {
 
     console.log('deliveredNotifications.length = ', deliveredNotifications.length);
 
-    //if (deliveredNotifications.length > 0) 
+    if (deliveredNotifications.length > 0) 
     {
       // notification object is missing userInfo. We know we received a notification but don't have sufficient
       // data to refresh 1 wallet. let's refresh all.

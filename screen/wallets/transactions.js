@@ -175,7 +175,7 @@ const WalletTransactions = () => {
    * Forcefully fetches TXs and balance for wallet
    */
   const refreshTransactions = async () => {
-    if (isLoading) return;
+    //if (isLoading) return;
     setIsLoading(true);
     let noErr = true;
     let smthChanged = false;
