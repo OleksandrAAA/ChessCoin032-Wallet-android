@@ -62,6 +62,7 @@ const Broadcast = () => {
       await BlueElectrum.ping();
       await BlueElectrum.waitTillConnected();
       const walletObj = new HDSegwitBech32Wallet();
+      console.log("====broadcast for HDSegwitBech32Wallet");
       const result = await walletObj.broadcastTx(txHex);
       if (result) {
         const tx = bitcoin.Transaction.fromHex(txHex);

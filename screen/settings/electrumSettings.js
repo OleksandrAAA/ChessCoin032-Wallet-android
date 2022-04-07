@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 8,
     minHeight: 36,
-    color: '#81868e',
+    color: BlueCurrentTheme.colors.foregroundColor,
     height: 36,
     paddingVertical:10,
     lineHeight: 40,

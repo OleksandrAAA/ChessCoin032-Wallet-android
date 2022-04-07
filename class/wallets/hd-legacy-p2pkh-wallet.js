@@ -11,7 +11,7 @@ const BlueElectrum = require('../../blue_modules/BlueElectrum');
 export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
   static type = 'HDlegacyP2PKH';
   static typeReadable = 'HD Legacy (BIP44 P2PKH)';
-  static derivationPath = "m/44'/597'/0'";
+  static derivationPath = "m/44'/0'/0'";
 
   allowSend() {
     return true;
@@ -40,7 +40,7 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
     const seed = this._getSeed();
     const root = bitcoin.bip32.fromSeed(seed);
 
-    const path = "m/44'/597'/0'";
+    const path = "m/44'/0'/0'";
     const child = root.derivePath(path).neutered();
     this._xpub = child.toBase58();
 
@@ -67,7 +67,7 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
     const seed = this._getSeed();
 
     const root = HDNode.fromSeed(seed);
-    const path = `m/44'/597'/0'/${internal ? 1 : 0}/${index}`;
+    const path = `m/44'/0'/0'/${internal ? 1 : 0}/${index}`;
     const child = root.derivePath(path);
 
     return child.toWIF();
@@ -140,8 +140,11 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
   }
 
   _addPsbtInput(psbt, input, sequence, masterFingerprintBuffer) {
+
+    console.log('*** hd-legacy-p2pkh-wallet: _addPsbtInput() calling ....');
+
     const pubkey = this._getPubkeyByAddress(input.address);
-    const path = this._getDerivationPathByAddress(input.address, 44);
+    const path = this._getDerivationPathByAddress(input.address, 0);
 
     if (!input.txhex) throw new Error('UTXO is missing txhex of the input, which is required by PSBT for non-segwit input');
 

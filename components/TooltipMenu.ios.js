@@ -7,12 +7,10 @@ const ToolTipMenu = (props, ref) => {
   const toolTip = useRef();
 
   const showMenu = () => {
-    console.log('Showing ToolTip');
     toolTip.current?.showMenu();
   };
 
   const hideMenu = () => {
-    console.log('Hiding ToolTip');
     toolTip.current?.hideMenu();
   };
 

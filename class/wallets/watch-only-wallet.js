@@ -172,6 +172,7 @@ export class WatchOnlyWallet extends LegacyWallet {
   }
 
   broadcastTx(hex) {
+    console.log("====broadcast for watch-only-wallet");
     if (this._hdWalletInstance) return this._hdWalletInstance.broadcastTx(hex);
     throw new Error('Not initialized');
   }

@@ -117,6 +117,7 @@ const PsbtWithHardwareWallet = () => {
   }, [deepLinkPSBT, routeParamsTXHex]);
 
   const broadcast = async () => {
+    console.log("====psbt broadcast", { broadcast });
     setIsLoading(true);
     const isBiometricsEnabled = await Biometric.isBiometricUseCapableAndEnabled();
 

@@ -44,8 +44,7 @@ export default class Confirm extends Component {
   }
 
   async componentDidMount() {
-    console.log('====address = ', this.state.recipients);
-    if (!this.state.recipients || !this.state.recipients.length) alert('Internal error: recipients list empty (this should never happen)');
+      if (!this.state.recipients || !this.state.recipients.length) alert('Internal error: recipients list empty (this should never happen)');
     this.isBiometricUseCapableAndEnabled = await Biometric.isBiometricUseCapableAndEnabled();
   }
 
@@ -66,10 +65,13 @@ export default class Confirm extends Component {
       try {
         const txids2watch = [];
         if (!this.state.isPayjoinEnabled) {
+          console.log('* this.state.tx: ', this.state.tx);
           await this.broadcast(this.state.tx);
         } else {
           const wallet = new PayjoinTransaction(this.state.psbt, txHex => this.broadcast(txHex), this.state.fromWallet);
+          console.log('* send wallet = ', wallet);
           const paymentScript = this.getPaymentScript();
+          console.log('* send paymentScript = ', paymentScript);
           let payjoinClient;
           if (this.state.payjoinUrl.includes('.onion')) {
             console.log('====trying TOR....');
@@ -111,6 +113,7 @@ export default class Confirm extends Component {
         }
 
         const txid = bitcoin.Transaction.fromHex(this.state.tx).getId();
+
         txids2watch.push(txid);
         Notifications.majorTomToGroundControl([], [], txids2watch);
         let amount = 0;
@@ -120,6 +123,8 @@ export default class Confirm extends Component {
         }
 
         amount = formatBalanceWithoutSuffix(amount, BitcoinUnit.CHESS, false);
+
+        console.log('* txid, amount', txid, amount);
 
         this.props.navigation.navigate('Success', {
           fee: Number(this.state.fee),
@@ -142,6 +147,7 @@ export default class Confirm extends Component {
   }
 
   async broadcast(tx) {
+ 
     await BlueElectrum.ping();
     await BlueElectrum.waitTillConnected();
 
@@ -151,8 +157,12 @@ export default class Confirm extends Component {
       }
     }
 
+    console.log('* this.state.fromWallet = ', this.state.fromWallet);
+    
+ 
     const result = await this.state.fromWallet.broadcastTx(tx);
     if (!result) {
+      console.log('* broadcastTx failed: result = ', result);
       throw new Error(loc.errors.broadcast);
     }
 

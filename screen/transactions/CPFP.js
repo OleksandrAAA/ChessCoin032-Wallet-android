@@ -100,6 +100,7 @@ export default class CPFP extends Component {
       try {
         await BlueElectrum.ping();
         await BlueElectrum.waitTillConnected();
+        console.log("====CPFP broadcast", { broadcast });
         const result = await this.state.wallet.broadcastTx(this.state.txhex);
         if (result) {
           this.onSuccessBroadcast();

@@ -222,8 +222,6 @@ export class AppStorage {
   async loadFromDisk(password) {
     let data = await this.getItem('data');
 
-    //console.log('wallet data=', data);
-
     if (password) {
       data = this.decryptData(data, password);
       if (data) {

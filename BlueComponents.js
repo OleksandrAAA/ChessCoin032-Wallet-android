@@ -1428,7 +1428,6 @@ export const BlueTransactionListItem = React.memo(({ item, itemPriceUnit = Bitco
       },
     ];
 
-    console.log('* BlueComponents.js:1428: item.hash = ', item.hash);
     if (item.hash) {
       actions.push({
         id: 'open_in_blockExplorer',

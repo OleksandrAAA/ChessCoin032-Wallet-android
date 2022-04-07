@@ -76,7 +76,6 @@ const LNDCreateInvoice = () => {
   });
 
   useEffect(() => {
-    // console.log(params)
     Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
     return () => {

@@ -65,7 +65,7 @@ const RateExtractors = Object.freeze({
   // },
   CoinGecko: async ticker => {
     const api = new Frisbee({ baseURI: 'https://api.coingecko.com' });
-    console.log("====api-gecko:: ticker=", ticker);
+
     const res = await api.get(`/api/v3/simple/price?ids=electra-protocol&vs_currencies=${ticker}&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`);
     if (res.err) throw new Error(`Could not update rate for ${ticker}: ${res.err}`);
 

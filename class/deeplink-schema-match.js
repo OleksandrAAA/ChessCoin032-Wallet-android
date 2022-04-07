@@ -40,7 +40,8 @@ class DeeplinkSchemaMatch {
     }
 
     console.log("======navigationRouteFor::", event.url)
-    if (event.url.toLowerCase().startsWith('bluewallet:bitcoin:') || event.url.toLowerCase().startsWith('bluewallet:lightning:')) {
+    
+    if (event.url.toLowerCase().startsWith('bluewallet:chesscoin:') || event.url.toLowerCase().startsWith('bluewallet:lightning:')) {
       event.url = event.url.substring(11);
     } else if (event.url.toLocaleLowerCase().startsWith('bluewallet://widget?action=')) {
       event.url = event.url.substring('bluewallet://'.length);
@@ -431,17 +432,15 @@ class DeeplinkSchemaMatch {
   }
 
   static bip21decode(uri) {
-     return bip21.decode(uri.replace('CHESSCOIN:', 'chesscoin:'));
+  	 return bip21.decode(uri.replace('CHESSCOIN:', 'chesscoin:'));
   }
 
   static bip21encode() {
-    console.log("====encode bip21::", arguments);
+    //console.log("====encode bip21::", arguments);
     return bip21.encode.apply(bip21, arguments);
   }
 
   static decodeBitcoinUri(uri) {
-    console.log('* decodeBitcoinUri: url: ', url);
-
     let amount = '';
     let parsedBitcoinUri = null;
     let address = uri || '';

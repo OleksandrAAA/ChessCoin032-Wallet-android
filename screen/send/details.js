@@ -29,7 +29,7 @@ import { BlueButton, BlueDismissKeyboardInputAccessory, BlueListItem, BlueLoadin
 import { navigationStyleTx } from '../../components/navigationStyle';
 import NetworkTransactionFees, { NetworkTransactionFee } from '../../models/networkTransactionFees';
 import { BitcoinUnit, Chain } from '../../models/bitcoinUnits';
-import { HDLegacyElectrumSeedP2PKHWallet, LegacyWallet, HDSegwitBech32Wallet, MultisigHDWallet, WatchOnlyWallet } from '../../class';
+import { LegacyWallet, HDSegwitBech32Wallet, MultisigHDWallet, WatchOnlyWallet } from '../../class';
 import DocumentPicker from 'react-native-document-picker';
 import DeeplinkSchemaMatch from '../../class/deeplink-schema-match';
 import loc, { formatBalance, formatBalanceWithoutSuffix } from '../../loc';
@@ -39,6 +39,7 @@ import AddressInput from '../../components/AddressInput';
 import AmountInput from '../../components/AmountInput';
 import InputAccessoryAllFunds from '../../components/InputAccessoryAllFunds';
 import { AbstractHDElectrumWallet } from '../../class/wallets/abstract-hd-electrum-wallet';
+import { HDLegacyElectrumSeedP2PKHWallet } from '../../class/wallets/hd-legacy-electrum-seed-p2pkh-wallet';
 import { BlueStorageContext } from '../../blue_modules/storage-context';
 import { color } from 'react-native-reanimated';
 const currency = require('../../blue_modules/currency');
@@ -115,8 +116,6 @@ const SendDetails = () => {
       return;
     }
     const wallet = (routeParams.walletID && wallets.find(w => w.getID() === routeParams.walletID)) || suitable[0];
-
-    console.log('* wallet = ', wallet);
 
     setWallet(wallet);
     setFeeUnit(wallet.getPreferredBalanceUnit());
@@ -253,9 +252,6 @@ const SendDetails = () => {
       while (true) {
         try {
           const { fee } = wallet.coinselect(lutxo, targets, opt.fee, changeAddress);         
-
-          console.log('* fee = ', fee);
-
           newFeePrecalc[opt.key] = fee / fee_factor;
           tempFee[opt.key] = fee / fee_factor;
           break;
@@ -342,7 +338,7 @@ const SendDetails = () => {
       return Alert.alert(loc.errors.error, loc.send.details_address_field_is_not_valid);
     }
 
-    const dataWithoutSchema = data.replace('chesscoin:', '');
+    const dataWithoutSchema = data.replace('chesscoin:', '').replace('CHESSCOIN:', '');
     if (wallet.isAddressValid(dataWithoutSchema)) {
       setAddresses(addresses => {
         addresses[scrollIndex.current].address = dataWithoutSchema;
@@ -367,7 +363,7 @@ const SendDetails = () => {
       options = decoded.options;
     }
 
-    if (btcAddressRx.test(address) || address.startsWith('c') || address.startsWith('C')) {
+    if (btcAddressRx.test(address) || address.startsWith('c1') || address.startsWith('C1')) {
       setAddresses(addresses => {
         addresses[scrollIndex.current].address = address;
         addresses[scrollIndex.current].amount = options.amount;
@@ -390,8 +386,6 @@ const SendDetails = () => {
     Keyboard.dismiss();
     setIsLoading(true);
     const requestedSatPerByte = feeRate;
-
-    console.log('* createTransaction: addresses', {addresses});
 
     for (const [index, transaction] of addresses.entries()) {
       let error;
@@ -451,35 +445,24 @@ const SendDetails = () => {
     const changeAddress = await getChangeAddressAsync();
     const requestedSatPerByte = Number(feeRate);
     const lutxo = utxo || wallet.getUtxo();
-    console.log("====psbt createPsbtTransaction::", { requestedSatPerByte, lutxo: lutxo.length });
-    console.log('====psbt changeAddress::', changeAddress);
-    console.log('====psbt requestedSatPerByte::', requestedSatPerByte);
-    console.log('* createTransaction: addeesses = ', addresses);
 
     const targets = [];
     for (const transaction of addresses) {
-      console.log('* transaction.amount = ', transaction.amount);
-
       if (transaction.amount === BitcoinUnit.MAX) {
         // output with MAX
         targets.push({ address: transaction.address });
         continue;
       }
       const value = parseInt(transaction.amountSats);
-      console.log('* transaction.value = ', value);
 
       if (value > 0) {
-        console.log("======psbt:transaction-1::", value, transaction.amount)
         targets.push({ address: transaction.address, value });
       } else if (transaction.amount) {
-        console.log("======psbt:transaction-2::", value, transaction.amount, currency.btcToSatoshi(transaction.amount))
         if (currency.btcToSatoshi(transaction.amount) > 0) {
           targets.push({ address: transaction.address, value: currency.btcToSatoshi(transaction.amount) });
         }
       }
     }
-
-    console.log('======psbt:transaction: 479');
 
     const { tx, outputs, psbt, fee } = wallet.createTransaction(
       lutxo,
@@ -487,10 +470,12 @@ const SendDetails = () => {
       requestedSatPerByte,
       changeAddress,
       isTransactionReplaceable ? HDSegwitBech32Wallet.defaultRBFSequence : HDSegwitBech32Wallet.finalRBFSequence,
-      true,
     );
 
-    console.log('======psbt:transaction: 489');
+    //console.log('======psbt:transaction:475: tx = ', JSON.stringify(tx));
+    //console.log('======psbt:transaction:476: outputs = ', JSON.stringify(outputs));
+    //console.log('======psbt:transaction:477: psbt = ', JSON.stringify(psbt));
+    //console.log('======psbt:transaction:478: fee = ', fee);
 
     if (wallet.type === WatchOnlyWallet.type) {
       // watch-only wallets with enabled HW wallet support have different flow. we have to show PSBT to user as QR code
@@ -519,6 +504,7 @@ const SendDetails = () => {
       txhex: tx.toHex(),
       memo,
     };
+
     await saveToDisk();
 
     const recipients = outputs.filter(({ address }) => address !== changeAddress);
@@ -531,6 +517,7 @@ const SendDetails = () => {
     //     value: tempvalue
     //   })
     // }
+
     navigation.navigate('Confirm', {
       fee: new BigNumber(fee).dividedBy(100000000).toNumber(),
       memo,
@@ -541,6 +528,7 @@ const SendDetails = () => {
       payjoinUrl,
       psbt,
     });
+
     setIsLoading(false);
   };
 

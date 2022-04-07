@@ -73,7 +73,6 @@ var encode = function (hrp, data, version) {
     for (var p = 0; p < combined.length; ++p) {
         ret += CHARSET.charAt(combined[p]);
     }
-
     return ret;
 };
 var decodeBc32 = function (bechString) {

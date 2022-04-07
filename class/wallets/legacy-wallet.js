@@ -329,7 +329,7 @@ export class LegacyWallet extends AbstractWallet {
    */
   async broadcastTx(txhex) {
     const broadcast = await BlueElectrum.broadcastV2(txhex);
-    console.log("====broadcast", { broadcast });
+    console.log("====legacy0wallet: broadcast => ", { broadcast });
     if (broadcast.indexOf('successfully') !== -1) return true;
     return broadcast.length === 64; // this means return string is txid (precise length), so it was broadcasted ok
   }
@@ -343,15 +343,7 @@ export class LegacyWallet extends AbstractWallet {
       algo = coinSelectSplit;
     }
 
-    console.log('* coinselect utxos:', utxos);
-    console.log('* coinselect targets:', targets);
-    console.log('* coinselect feeRate:', feeRate);
-
     const { inputs, outputs, fee } = algo(utxos, targets, feeRate);
-
-    console.log('* coinselect inputs:', inputs);
-    console.log('* coinselect outputs:', outputs);
-    console.log('* coinselect fee:', fee);
 
     // .inputs and .outputs will be undefined if no solution was found
     if (!inputs || !outputs) {
@@ -372,7 +364,9 @@ export class LegacyWallet extends AbstractWallet {
    * @param masterFingerprint {number} Decimal number of wallet's master fingerprint
    * @returns {{outputs: Array, tx: Transaction, inputs: Array, fee: Number, psbt: Psbt}}
    */
-  createTransaction(utxos, targets, feeRate, changeAddress, sequence, skipSigning = false, masterFingerprint) {
+  createTransaction(utxos, targets, feeRate, changeAddress, sequence, skipSigning = false, masterFingerprint = null) {
+    console.log('*** legacy-wallet: createTransaction() calling ....');
+
     if (targets.length === 0) throw new Error('No destination provided');
     const { inputs, outputs, fee } = this.coinselect(utxos, targets, feeRate, changeAddress);
     sequence = sequence || 0xffffffff; // disable RBF by default

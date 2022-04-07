@@ -88,7 +88,7 @@ async function connectMain() {
     RNWidgetCenter.reloadAllTimelines();
   } catch (e) {
     // Must be running on Android
-    console.log('BlueEkectrum.js:87', e);
+    console.log('BlueEkectrum.js:91', e);
   }
 
   try {
@@ -129,7 +129,6 @@ async function connectMain() {
       if (header && header.height) {
         latestBlockheight = header.height;
         latestBlockheightTimestamp = Math.floor(+new Date() / 1000);
-        console.log('[* BlueElectrum.js:132] latestBlockheight = ', latestBlockheight);
       }
       // AsyncStorage.setItem(storageKey, JSON.stringify(peers));  TODO: refactor
     }
@@ -139,7 +138,6 @@ async function connectMain() {
   }
 
   if (!mainConnected) {
-    console.log('retry');
     connectionAttempt = connectionAttempt + 1;
     mainClient.close && mainClient.close();
     if (connectionAttempt >= 5) {
@@ -295,7 +293,6 @@ module.exports.getConfig = async function (subscribe) {
     const header = await mainClient.blockchainHeaders_subscribe();
     if (header && header.height) {
       latestBlockheight = header.height;
-      console.log('[* BlueElectrum.js:132] latestBlockheight = ', latestBlockheight);
     }
   }
 

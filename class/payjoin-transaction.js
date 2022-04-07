@@ -56,6 +56,7 @@ export default class PayjoinTransaction {
 
   async broadcastTx(txHex) {
     try {
+      console.log("====payjoin broadcast", { broadcast });
       const result = await this._broadcast(txHex);
       if (!result) {
         throw new Error(`Broadcast failed`);

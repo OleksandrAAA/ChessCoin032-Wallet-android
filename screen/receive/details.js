@@ -257,7 +257,7 @@ const ReceiveDetails = () => {
   }, []);
 
   const setAddressBIP21Encoded = address => {
-    const bip21encoded = DeeplinkSchemaMatch.bip21encode(address);
+    const bip21encoded = DeeplinkSchemaMatch.bip21encode(address).replace('bitcoin:', 'chesscoin:');
     console.log("==========setaddressbip21::", address, bip21encoded)
     setParams({ address });
     setBip21encoded(bip21encoded);
