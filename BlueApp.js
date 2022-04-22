@@ -41,7 +41,6 @@ const startAndDecrypt = async retry => {
   }
 
   if (success) {
-    console.log('* loaded from disk');
     // We want to return true to let the UnlockWith screen that its ok to proceed.
     return true;
   }
