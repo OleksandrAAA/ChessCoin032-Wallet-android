@@ -16,7 +16,7 @@ node --version && npm --version
 
 ```
 git clone https://github.com/OleksandrAAA/ChessCoin032-Wallet-android.git
-cd ChessCoin032-Wallet
+cd ChessCoin032-Wallet-android
 npm install
 ```
 
