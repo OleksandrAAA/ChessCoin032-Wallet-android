@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OleksandrAAA/ChessCoin032-Wallet.git"
+    "url": "https://github.com/OleksandrAAA/ChessCoin032-Wallet-android.git"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
