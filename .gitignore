@@ -71,3 +71,6 @@ artifacts/
 *.mx
 *.realm
 *.realm.lock
+
+package-lock.json
+*/*/package-lock.json
