@@ -113,9 +113,9 @@ const NotificationSettings = () => {
           color: colors.foregroundColor,
         }}
         onPress={() => Linking.openURL('https://github.com/OleksandrAAA/GroundControl')}
-        titleStyle={{ color: colors.buttonAlternativeTextColor }}
+        titleStyle={{ color: colors.foregroundColor, fontSize: 14 }}
         title="github.com/OleksandrAAA/GroundControl"
-        color={colors.foregroundColor}
+        color={colors.buttonTextColor}
         buttonStyle={styles.buttonStyle}
       />
 
@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     minHeight: 36,
     height: 36,
+    paddingTop: 8,
   },
   buttonStyle: {
     backgroundColor: 'transparent',
