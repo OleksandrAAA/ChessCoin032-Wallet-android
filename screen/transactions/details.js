@@ -174,13 +174,11 @@ const TransactionsDetails = () => {
   };
 
   const handleOnOpenTransactionOnBlockExporerTapped = () => {
-    //const url = `https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`;
     const url = `https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`;
     Linking.openURL(url);
   };
 
   const handleCopyPress = () => {
-    //Clipboard.setString(`https://chainz.cryptoid.info/chess/block.dws?${tx.hash}.htm`);
     Clipboard.setString(`https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`);
   };
 
