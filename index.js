@@ -23,3 +23,5 @@ const BlueAppComponent = () => {
 };
 
 AppRegistry.registerComponent('Chess032Wallet', () => BlueAppComponent);
+
+

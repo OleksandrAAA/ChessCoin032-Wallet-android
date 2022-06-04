@@ -3,4 +3,4 @@
  */
 
 //export const groundControlUri = 'https://groundcontrol-bluewallet.herokuapp.com/';
-export const groundControlUri = 'http://54.36.163.33:8001/';
+export const groundControlUri = 'http://51.178.41.236:8001/';

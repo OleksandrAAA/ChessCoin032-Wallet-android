@@ -324,7 +324,7 @@
     "retype_password": "Re-type password",
     "selfTest": "Self-Test",
     "save": "Save",
-    "saved": "Saved",
+    "saved": "Saved Successfully",
     "success_transaction_broadcasted" : "Success! You transaction has been broadcasted!",
     "total_balance": "Total Balance",
     "total_balance_explanation": "Display the total balance of all your wallets on your home screen widgets.",
