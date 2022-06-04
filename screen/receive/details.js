@@ -190,6 +190,7 @@ const ReceiveDetails = () => {
               backgroundColor="#FFFFFF"
               ecl="H"
               getRef={qrCode}
+              style={{ marginTop: 10 }}
             />
           </TouchableWithoutFeedback>
           <BlueCopyTextToClipboard text={isCustom ? showQRData : address} />
