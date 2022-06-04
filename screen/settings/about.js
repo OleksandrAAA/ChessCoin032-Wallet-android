@@ -26,6 +26,7 @@ const About = () => {
     logo: {
       width: 124,
       height: 124,
+      marginTop: 10,
     },
     textFree: {
       maxWidth: 260,
