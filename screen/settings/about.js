@@ -95,7 +95,7 @@ const About = () => {
   };
   const handleOnRatePress = () => {
     const options = {
-      AppleAppID: '1376878040',
+      AppleAppID: 'com.electrum.chess032wallet',
       GooglePackageName: 'com.electrum.chess032wallet',
       preferredAndroidMarket: AndroidMarket.Google,
       preferInApp: true,
