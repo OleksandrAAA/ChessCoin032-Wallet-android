@@ -153,9 +153,7 @@ const SendDetails = () => {
       })
       .catch(e => console.log('loading cached recommendedFees error', e));
 
-    // load fresh fees from servers
-
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // load fresh fees from servers      
     setNetworkTransactionFeesIsLoading(true);
     NetworkTransactionFees.recommendedFees()
       .then(async fees => {
@@ -165,7 +163,7 @@ const SendDetails = () => {
       })
       .catch(e => console.log('loading recommendedFees error', e))
       .finally(() => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setNetworkTransactionFeesIsLoading(false);
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -278,6 +276,8 @@ const SendDetails = () => {
     firstLoading? setFeePrecalc(newFeePrecalc) : setFeePrecalc(tempFee);
      
     }, [wallet, networkTransactionFees, utxo, addresses, feeRate, dumb]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
   const getChangeAddressFast = () => {
     if (changeAddress) return changeAddress; // cache
@@ -721,7 +721,7 @@ const SendDetails = () => {
   };
 
   const handleAddRecipient = async () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => scrollView.current.scrollToEnd());
+    //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => scrollView.current.scrollToEnd());
     setAddresses(addresses => [...addresses, { address: '', key: String(Math.random()) }]);
     setOptionsVisible(false);
     scrollView.current.scrollToEnd();
@@ -732,7 +732,7 @@ const SendDetails = () => {
 
   const handleRemoveRecipient = async () => {
     const last = scrollIndex.current === addresses.length - 1;
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setAddresses(addresses => {
       addresses.splice(scrollIndex.current, 1);
       return [...addresses];
@@ -838,7 +838,7 @@ const SendDetails = () => {
               units[scrollIndex.current] = BitcoinUnit.CHESS;
               return [...units];
             });
-            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+            //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
             setOptionsVisible(false);
           },
           style: 'default',
