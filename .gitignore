@@ -75,3 +75,4 @@ artifacts/
 package-lock.json
 */*/package-lock.json
 yarn.lock
+android/app/release/
