@@ -84,7 +84,7 @@ export const BlueDarkTheme = {
     lightButton: 'rgba(255,255,255,.1)',
     buttonAlternativeTextColor: '#ffffff',
     alternativeTextColor: '#9aa0aa',
-    alternativeTextColor2: '#000000',
+    alternativeTextColor2: '#ffffff',
     ballReceive: '#202020',
     ballOutgoing: '#202020',
     lightBorder: '#313030',
