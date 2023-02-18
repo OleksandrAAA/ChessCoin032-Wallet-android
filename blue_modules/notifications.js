@@ -24,7 +24,6 @@ function Notifications(props) {
     try {
       let token = await AsyncStorage.getItem(PUSH_TOKEN);
       token = JSON.parse(token);
-      //console.log('TOKEN = ', token);
       return token;
     } catch (_) {}
     return false;

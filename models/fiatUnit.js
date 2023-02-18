@@ -66,21 +66,23 @@ const RateExtractors = Object.freeze({
   CoinGecko: async ticker => {
     const api = new Frisbee({ baseURI: 'https://api.coingecko.com' });
 
-    const res = await api.get(`/api/v3/simple/price?ids=electra-protocol&vs_currencies=${ticker}&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`);
+    const res = await api.get(`/api/v3/simple/price?ids=chesscoin-0-32&vs_currencies=${ticker}&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`);
     if (res.err) throw new Error(`Could not update rate for ${ticker}: ${res.err}`);
 
     let json;
     try {
       json = typeof res.body === 'string' ? JSON.parse(res.body) : res.body;
-      console.log("===json ::", json);//{"electra-protocol": {"ltc": 0.00000728}}
+      console.log("===json ::", json);
     } catch (e) {
       throw new Error(`Could not update rate for ${ticker}: ${e.message}`);
     }
-    let rate = json?.["electra-protocol"]?.[ticker.toLowerCase()]; // eslint-disable-line
+    
+    let rate = json?.["chesscoin-0-32"]?.[ticker.toLowerCase()]; // eslint-disable-line
     if (!rate) throw new Error(`Could not update rate for ${ticker}: data is wrong`);
 
     rate = Number(rate);
     if (!(rate >= 0)) throw new Error(`Could not update rate for ${ticker}: data is wrong`);
+    console.log("===chess rate ::", rate);
     return rate;
   },
 });

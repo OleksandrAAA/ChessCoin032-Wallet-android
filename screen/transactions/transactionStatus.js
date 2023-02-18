@@ -280,7 +280,7 @@ const TransactionsStatus = () => {
       <HandoffComponent
         title={`Bitcoin Transaction ${tx.hash}`}
         type="com.electrum.chess032wallet"
-        url={`https://blockstream.info/tx/${tx.hash}`}
+        url={`https://chainz.cryptoid.info/chess/tx.dws?${tx.hash}.htm`}
       />
 
       <StatusBar barStyle="default" />

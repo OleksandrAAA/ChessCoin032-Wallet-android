@@ -86,7 +86,7 @@ const NotificationSettings = () => {
         alert(loc.settings.saved);
       }
     } catch (error) {
-      console.warn(error);
+      console.warn('NotificationsSetting', error);
     }
     setIsLoading(false);
   }, [URI]);

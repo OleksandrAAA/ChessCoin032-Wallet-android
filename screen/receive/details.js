@@ -89,8 +89,9 @@ const ReceiveDetails = () => {
     },
     qrCodeContainer: { borderWidth: 6, borderRadius: 8, borderColor: '#FFFFFF' },
     root: {
-      // flex: 1,
+      flex: 1,
       backgroundColor: colors.elevated,
+      height: '100%',      
       justifyContent: 'space-between',
     },
     scrollBody: {
@@ -212,7 +213,7 @@ const ReceiveDetails = () => {
   };
 
   const obtainWalletAddress = useCallback(async () => {
-    Privacy.enableBlur();
+    //Privacy.enableBlur();
     wallet.setUserHasSavedExport(true);
     await saveToDisk();
     let newAddress;
@@ -289,7 +290,7 @@ const ReceiveDetails = () => {
       });
       return () => {
         task.cancel();
-        Privacy.disableBlur();
+        //Privacy.disableBlur();
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [wallet]),
@@ -390,7 +391,7 @@ const ReceiveDetails = () => {
         <HandoffComponent
           title={`Bitcoin Transaction ${address}`}
           type="com.electrum.chess032wallet"
-          url={`https://blockstream.info/address/${address}`}
+          url={`https://chainz.cryptoid.info/chess/tx.dws?${address}.htm`}
         />
       )}
       {showAddress ? renderReceiveDetails() : <BlueLoading />}
