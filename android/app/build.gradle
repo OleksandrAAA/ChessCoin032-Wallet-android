@@ -134,9 +134,9 @@ android {
     defaultConfig {
         applicationId "com.electrum.chess032wallet"
         minSdkVersion 28
-        targetSdkVersion 31
-        versionCode 6
-        versionName "1.0.5"
+        targetSdkVersion 33
+        versionCode 7
+        versionName "1.0.6"
         multiDexEnabled true
         missingDimensionStrategy 'react-native-camera', 'general'
         testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
